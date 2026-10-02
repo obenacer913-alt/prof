@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أُستاذي | منصة الأساتذة والإدارة - الطور المتوسط الجزائر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#0E9B4D',700:'#0B6B3A',800:'#064A28',900:'#053A21',950:'#022815'},
+        gold: {400:'#E8C547',500:'#D4A017',600:'#B8890B',100:'#FEF6D8',50:'#FFFBEB'},
+        navy: {800:'#1e293b',900:'#0F172A',950:'#020617'},
+        sand:'#F8FAF6'
+      },
+      fontFamily: {cairo:['Cairo','sans-serif'],taj:['Tajawal','sans-serif'],amiri:['Amiri','serif'],plex:['"IBM Plex Sans Arabic"','sans-serif']},
+      boxShadow: {soft:'0 10px 40px -10px rgba(11,107,58,.15)',card:'0 4px 24px -4px rgba(0,0,0,.08)',glow:'0 0 40px rgba(212,160,23,.35)'}
+    }
+  }
+}
+</script>
+<style>
+*{font-family:'Cairo','Tajawal',sans-serif}
+body{background:#F8FAF6;color:#0F172A;overflow-x:hidden}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#eef2ef}
+::-webkit-scrollbar-thumb{background:linear-gradient(#0B6B3A,#D4A017);border-radius:99px}
+.hero-mesh{background:radial-gradient(ellipse 60% 50% at 80% 10%,rgba(212,160,23,.18),transparent),radial-gradient(ellipse 70% 60% at 15% 20%,rgba(11,107,58,.14),transparent),radial-gradient(ellipse 50% 40% at 50% 90%,rgba(11,107,58,.08),transparent),linear-gradient(180deg,#FFFFFF 0%,#F0FDF4 50%,#F8FAF6 100%)}
+.pattern-bg{background-image:radial-gradient(rgba(11,107,58,.09) 1.5px,transparent 1.5px);background-size:22px 22px}
+.glass{background:rgba(255,255,255,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.float-anim{animation:floaty 5s ease-in-out infinite}
+.float-anim2{animation:floaty 6.5s ease-in-out infinite reverse}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes pulse-ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+.pulse-dot::after{content:'';position:absolute;inset:0;border-radius:99px;background:#22c55e;animation:pulse-ring 1.8s ease-out infinite}
+.grad-text{background:linear-gradient(120deg,#0B6B3A 20%,#0E9B4D 45%,#D4A017 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad-btn{background:linear-gradient(135deg,#0B6B3A,#0E9B4D);transition:.3s}
+.grad-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(11,107,58,.5)}
+.gold-btn{background:linear-gradient(135deg,#D4A017,#E8C547);transition:.3s}
+.gold-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(212,160,23,.5)}
+.card-hover{transition:.35s cubic-bezier(.4,0,.2,1)}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 50px -12px rgba(11,107,58,.2)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.accordion-body.open{max-height:3000px}
+.maqta-card{transition:.3s}
+.maqta-card.active{border-color:#0B6B3A;box-shadow:0 10px 40px -10px rgba(11,107,58,.25)}
+.tab-btn{transition:.25s}
+.tab-btn.active{background:#0B6B3A;color:#fff;box-shadow:0 8px 20px -6px rgba(11,107,58,.5)}
+.level-pill{transition:.25s;cursor:pointer}
+.level-pill.active{background:linear-gradient(135deg,#0B6B3A,#0E9B4D);color:#fff;transform:scale(1.05);box-shadow:0 8px 20px -6px rgba(11,107,58,.5)}
+.subj-chip{transition:.25s;cursor:pointer}
+.subj-chip.active{border-color:#0B6B3A;background:#f0fdf4;transform:scale(1.03)}
+.role-card{transition:.25s;cursor:pointer;border:2px solid #e5e7eb}
+.role-card.selected{border-color:#0B6B3A;background:#f0fdf4;box-shadow:0 8px 24px -8px rgba(11,107,58,.35)}
+.sidebar-link{transition:.25s;border-right:3px solid transparent}
+.sidebar-link:hover{background:rgba(11,107,58,.07)}
+.sidebar-link.active{background:linear-gradient(90deg,rgba(11,107,58,.12),rgba(11,107,58,.03));border-right-color:#0B6B3A;color:#0B6B3A;font-weight:800}
+.check-item{transition:.25s}
+.check-item.done{background:#f0fdf4;border-color:#22c55e!important}
+.progress-bar{transition:width 1s cubic-bezier(.4,0,.2,1)}
+.modal-bg{background:rgba(2,40,21,.6);backdrop-filter:blur(8px)}
+.modal-panel{animation:modalIn .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes modalIn{from{transform:scale(.9) translateY(30px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.toast{animation:toastIn .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes toastIn{from{transform:translateY(20px) scale(.9);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.timeline-dot::before{content:'';position:absolute;top:32px;bottom:-10px;right:27px;width:2px;background:linear-gradient(#0B6B3A33,#0B6B3A11)}
+.timeline-item:last-child .timeline-dot::before{display:none}
+.chat-msg{animation:toastIn .3s ease}
+.grade-input{width:56px;text-align:center;border:1px solid #e5e7eb;border-radius:8px;padding:4px;font-weight:700}
+.grade-input:focus{border-color:#0B6B3A;outline:none;background:#f0fdf4}
+table.app-table th{background:#0B6B3A;color:#fff;font-weight:700;padding:12px}
+table.app-table td{padding:10px 12px;border-bottom:1px solid #eef2ef}
+table.app-table tr:hover td{background:#f0fdf4}
+.badge-official{background:linear-gradient(135deg,#0B6B3A,#064A28);color:#fff;font-size:11px;padding:3px 10px;border-radius:99px;font-weight:700;display:inline-flex;align-items:center;gap:5px}
+@media print{.no-print{display:none!important}#printArea{display:block!important}body *{visibility:hidden}#printArea,#printArea *{visibility:visible}#printArea{position:absolute;top:0;right:0;left:0}}
+#printArea{display:none}
+.marquee{animation:marquee 25s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(50%)}}
+.reveal{opacity:0;transform:translateY(30px)}
+.lesson-check:checked + span{text-decoration:line-through;color:#16a34a}
+select,input[type=text],input[type=email],input[type=password],input[type=tel],textarea{font-family:'Cairo'}
+.fb-btn{background:#1877F2;transition:.3s}
+.fb-btn:hover{background:#0f5fd0;transform:translateY(-2px);box-shadow:0 12px 25px -8px rgba(24,119,242,.5)}
+.wave-divider{height:70px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23064A28' d='M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E");background-size:cover}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP ANNOUNCEMENT ===== -->
+<div class="bg-gradient-to-l from-primary-900 via-primary-800 to-primary-900 text-white text-center text-[13px] py-2 px-4 font-semibold no-print">
+  <span class="inline-flex items-center gap-2 flex-wrap justify-center">
+    <span class="bg-gold-500 text-primary-950 text-[11px] font-black px-2 py-0.5 rounded-full">جديد 2025-2026</span>
+    مطابق لمنهاج الجيل الثاني ومخططات وزارة التربية الوطنية الجزائرية
+    <span class="hidden md:inline text-primary-200">|</span>
+    <span class="hidden md:inline text-gold-400">التوزيعات السنوية + مذكرات + ملف المفتش جاهزة</span>
+  </span>
+</div>
+
+<!-- ==================== LANDING ==================== -->
+<div id="landing">
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 glass border-b border-primary-100 shadow-sm no-print">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-700 to-primary-900 flex items-center justify-center shadow-soft relative">
+        <i class="fa-solid fa-graduation-cap text-gold-400 text-2xl"></i>
+        <span class="absolute -top-1 -left-1 w-4 h-4 bg-gold-500 rounded-full border-2 border-white"></span>
+      </div>
+      <div>
+        <h1 class="font-black text-xl leading-none">أُستاذي <span class="text-gold-600 text-sm font-bold">OUSTADI</span></h1>
+        <p class="text-[11px] text-gray-500 font-semibold">منصة الأساتذة والإدارة • الطور المتوسط</p>
+      </div>
+    </div>
+    <div class="hidden lg:flex items-center gap-6 font-bold text-[15px] text-gray-700">
+      <a href="#hero" class="hover:text-primary-700 transition">الرئيسية</a>
+      <a href="#guidePreview" class="hover:text-primary-700 transition">الدليل البيداغوجي</a>
+      <a href="#subjects" class="hover:text-primary-700 transition">المواد الدراسية</a>
+      <a href="#inspector" class="hover:text-primary-700 transition">ملف المفتش</a>
+      <a href="#adminSec" class="hover:text-primary-700 transition">فضاء الإدارة</a>
+    </div>
+    <div class="flex items-center gap-2" id="navAuthBtns">
+      <button onclick="openAuth('login')" class="hidden sm:inline-flex px-5 py-2.5 rounded-xl font-bold text-primary-800 hover:bg-primary-50 border border-primary-200 transition"><i class="fa-solid fa-right-to-bracket ml-2"></i>دخول</button>
+      <button onclick="openAuth('register')" class="grad-btn text-white px-5 py-2.5 rounded-xl font-bold shadow-soft"><i class="fa-solid fa-user-plus ml-2"></i>إنشاء حساب</button>
+      <button class="lg:hidden w-10 h-10 rounded-xl bg-primary-50 text-primary-800" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden border-t bg-white px-4 py-3 flex flex-col gap-2 font-bold text-gray-700">
+    <a href="#hero" class="py-2 border-b">الرئيسية</a>
+    <a href="#guidePreview" class="py-2 border-b">الدليل البيداغوجي</a>
+    <a href="#subjects" class="py-2 border-b">المواد الدراسية</a>
+    <a href="#inspector" class="py-2 border-b">ملف المفتش</a>
+    <a href="#adminSec" class="py-2">فضاء الإدارة</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero-mesh pattern-bg relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 pt-12 pb-16 grid lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <div class="hero-el inline-flex items-center gap-2 bg-white border border-primary-200 rounded-full px-4 py-1.5 shadow-sm text-[13px] font-bold text-primary-800 mb-5">
+        <span class="relative flex w-2.5 h-2.5"><span class="pulse-dot relative inline-flex rounded-full w-2.5 h-2.5 bg-green-500"></span></span>
+        الجمهورية الجزائرية • وزارة التربية الوطنية • الطور المتوسط
+      </div>
+      <h2 class="hero-el text-4xl md:text-5xl font-black leading-[1.25] mb-4">كل ما يحتاجه <span class="grad-text">أستاذ المتوسط</span> والإدارة في منصة واحدة ذكية</h2>
+      <p class="hero-el text-gray-600 text-lg leading-relaxed mb-6">حسابات خاصة للأساتذة والإدارة • دليل بيداغوجي شامل (المقاطع، الموارد المعرفية، الكفاءات المستهدفة، المنهاج) • ملف المفتش كاملاً وفق منهاج الجيل الثاني.</p>
+      <div class="hero-el flex flex-wrap gap-3 mb-8">
+        <button onclick="openAuth('register')" class="grad-btn text-white px-7 py-3.5 rounded-2xl font-black text-lg shadow-soft"><i class="fa-solid fa-rocket ml-2"></i>سجّل مجاناً الآن</button>
+        <button onclick="scrollToId('guidePreview')" class="bg-white border-2 border-primary-200 text-primary-800 px-7 py-3.5 rounded-2xl font-black text-lg hover:border-primary-600 transition"><i class="fa-solid fa-book-open ml-2"></i>استكشف الدليل</button>
+      </div>
+      <div class="hero-el flex flex-wrap items-center gap-3 mb-6">
+        <button onclick="quickDemo('teacher')" class="text-[13px] bg-primary-50 border border-primary-200 text-primary-800 px-4 py-2 rounded-xl font-bold hover:bg-primary-100"><i class="fa-solid fa-chalkboard-user ml-1 text-primary-600"></i> تجربة كأستاذ</button>
+        <button onclick="quickDemo('admin')" class="text-[13px] bg-gold-50 border border-gold-500/40 text-gold-600 px-4 py-2 rounded-xl font-bold hover:bg-gold-100"><i class="fa-solid fa-user-shield ml-1"></i> تجربة كإدارة</button>
+        <button onclick="openAuth('register');setTimeout(simulateFacebook,600)" class="text-[13px] fb-btn text-white px-4 py-2 rounded-xl font-bold"><i class="fa-brands fa-facebook ml-1"></i> التسجيل بالفيسبوك</button>
+      </div>
+      <div class="hero-el grid grid-cols-4 gap-3 max-w-lg">
+        <div class="bg-white rounded-2xl p-3 text-center shadow-card border"><p class="font-black text-2xl text-primary-700 counter" data-target="12">0</p><p class="text-[11px] font-bold text-gray-500">مادة دراسية</p></div>
+        <div class="bg-white rounded-2xl p-3 text-center shadow-card border"><p class="font-black text-2xl text-primary-700 counter" data-target="4">0</p><p class="text-[11px] font-bold text-gray-500">مستويات</p></div>
+        <div class="bg-white rounded-2xl p-3 text-center shadow-card border"><p class="font-black text-2xl text-primary-700"><span class="counter" data-target="850">0</span>+</p><p class="text-[11px] font-bold text-gray-500">مذكرة ودليل</p></div>
+        <div class="bg-white rounded-2xl p-3 text-center shadow-card border"><p class="font-black text-2xl text-gold-600">100%</p><p class="text-[11px] font-bold text-gray-500">مطابق للمنهاج</p></div>
+      </div>
+    </div>
+    <div class="relative hero-el">
+      <div class="bg-white rounded-3xl shadow-2xl border overflow-hidden">
+        <div class="bg-gradient-to-l from-primary-800 to-primary-700 px-5 py-3 flex items-center justify-between">
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-400"></span><span class="w-3 h-3 rounded-full bg-yellow-400"></span><span class="w-3 h-3 rounded-full bg-green-400"></span></div>
+          <p class="text-white text-sm font-bold"><i class="fa-solid fa-book-open ml-1 text-gold-400"></i> الدليل البيداغوجي — رياضيات 4 متوسط</p>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="badge-official"><i class="fa-solid fa-certificate"></i> منهاج الجيل الثاني</span>
+            <span class="text-[11px] bg-gold-100 text-gold-600 px-2 py-1 rounded-full font-bold">المعامل 4 • 5 سا/أسبوع</span>
+          </div>
+          <div class="bg-primary-50 border border-primary-200 rounded-2xl p-4 mb-4">
+            <p class="font-black text-primary-900 text-sm mb-1"><i class="fa-solid fa-bullseye text-gold-600 ml-1"></i> الكفاءة الشاملة</p>
+            <p class="text-[13px] text-gray-700 leading-relaxed">حل وضعيات مشكلة دالة بتوظيف الأعداد، الحساب الحرفي، الدوال والهندسة مع البرهنة والتواصل الرياضي.</p>
+          </div>
+          <div class="space-y-2" id="heroMaqati3"></div>
+          <div class="mt-4 flex gap-2">
+            <div class="flex-1 bg-gray-50 rounded-xl p-2 text-center border"><i class="fa-solid fa-file-pdf text-red-500"></i><p class="text-[11px] font-bold">المنهاج PDF</p></div>
+            <div class="flex-1 bg-gray-50 rounded-xl p-2 text-center border"><i class="fa-solid fa-clipboard-list text-primary-600"></i><p class="text-[11px] font-bold">ملف المفتش</p></div>
+            <div class="flex-1 bg-gray-50 rounded-xl p-2 text-center border"><i class="fa-solid fa-layer-group text-gold-600"></i><p class="text-[11px] font-bold">850 مذكرة</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="float-anim absolute -top-5 -left-3 bg-white rounded-2xl shadow-xl border p-3 flex items-center gap-2">
+        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center"><i class="fa-solid fa-check-double text-green-600"></i></div>
+        <div><p class="font-black text-[13px]">ملف المفتش جاهز</p><p class="text-[11px] text-gray-500">12/12 وثيقة ✓</p></div>
+      </div>
+      <div class="float-anim2 absolute -bottom-5 -right-2 bg-primary-900 text-white rounded-2xl shadow-xl p-3 flex items-center gap-2">
+        <div class="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center"><i class="fa-brands fa-facebook text-white text-xl"></i></div>
+        <div><p class="font-black text-[13px]">دخول بالفيسبوك</p><p class="text-[11px] text-primary-200">تسجيل في 10 ثوانٍ</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-primary-100 bg-white/70 py-3 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 flex items-center gap-6 text-[13px] font-bold text-gray-500 whitespace-nowrap overflow-x-auto">
+      <span class="flex items-center gap-2 shrink-0"><i class="fa-solid fa-landmark text-primary-700"></i> وزارة التربية الوطنية</span>
+      <span class="shrink-0">•</span><span class="shrink-0">الديوان الوطني للمطبوعات المدرسية</span><span class="shrink-0">•</span>
+      <span class="shrink-0">المعهد الوطني للبحث في التربية</span><span class="shrink-0">•</span>
+      <span class="shrink-0">مخططات التعلمات السنوية 2025-2026</span><span class="shrink-0">•</span>
+      <span class="shrink-0">دليل الأستاذ الرسمي</span><span class="shrink-0">•</span>
+      <span class="shrink-0 text-primary-700">منهاج الجيل الثاني — الطور المتوسط</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <div class="text-center mb-10 reveal">
+    <span class="bg-primary-100 text-primary-800 px-4 py-1 rounded-full text-[13px] font-black">لماذا أُستاذي؟</span>
+    <h3 class="text-3xl md:text-4xl font-black mt-3">منصة مصممة بمعايير <span class="grad-text">احترافية عالمية</span> للتعليم الجزائري</h3>
+    <p class="text-gray-500 mt-2 font-semibold">حسابات مؤمّنة • دليل بيداغوجي رسمي • إدارة ذكية للمتوسطة</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="reveal card-hover bg-white rounded-3xl p-6 border shadow-card relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-24 h-24 bg-primary-50 rounded-bl-full"></div>
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center mb-4 relative"><i class="fa-solid fa-users-gear text-white text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">حسابات الأساتذة والإدارة</h4>
+      <p class="text-gray-500 text-[15px] leading-relaxed mb-4">تسجيل مباشر بالبريد الإلكتروني أو الفيسبوك، أدوار مخصصة (أستاذ، مدير، مشرف)، ولوحات تحكم مستقلة لكل دور.</p>
+      <div class="flex gap-2"><span class="text-[11px] bg-blue-50 text-blue-700 px-2 py-1 rounded-lg font-bold"><i class="fa-brands fa-facebook ml-1"></i>Facebook Login</span><span class="text-[11px] bg-primary-50 text-primary-700 px-2 py-1 rounded-lg font-bold"><i class="fa-solid fa-envelope ml-1"></i>Email</span></div>
+    </div>
+    <div class="reveal card-hover bg-gradient-to-b from-primary-800 to-primary-950 rounded-3xl p-6 shadow-card text-white relative overflow-hidden">
+      <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-gold-500/20 rounded-full blur-2xl"></div>
+      <div class="w-14 h-14 rounded-2xl bg-gold-500 flex items-center justify-center mb-4"><i class="fa-solid fa-book-open-reader text-primary-950 text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">الدليل الشامل للأستاذ <span class="text-[11px] bg-gold-500 text-primary-950 px-2 py-0.5 rounded-full font-black align-middle">الأهم</span></h4>
+      <p class="text-primary-100 text-[15px] leading-relaxed mb-4">المقاطع التعليمية، الموارد المعرفية، الكفاءات المستهدفة والختامية، المنهاج الرسمي، الوضعيات الأم — لكل مادة ومستوى.</p>
+      <button onclick="scrollToId('guidePreview')" class="text-gold-400 font-black text-sm">استكشف الدليل <i class="fa-solid fa-arrow-left mr-1"></i></button>
+    </div>
+    <div class="reveal card-hover bg-white rounded-3xl p-6 border shadow-card relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-24 h-24 bg-gold-50 rounded-bl-full"></div>
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-4 relative"><i class="fa-solid fa-clipboard-check text-white text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">ملف المفتش كاملاً</h4>
+      <p class="text-gray-500 text-[15px] leading-relaxed mb-4">كل ما يطلبه مفتش المادة: التوزيع السنوي، دفتر التحضير، دفتر التنقيط، كراس التكوين، الفروض والاختبارات...</p>
+      <div class="w-full bg-gray-100 rounded-full h-2 mt-2"><div class="bg-gradient-to-l from-primary-600 to-gold-500 h-2 rounded-full" style="width:100%"></div></div>
+      <p class="text-[11px] font-bold text-gray-400 mt-1">12 وثيقة رسمية مطلوبة</p>
+    </div>
+    <div class="reveal card-hover bg-white rounded-3xl p-6 border shadow-card">
+      <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-4"><i class="fa-solid fa-layer-group text-blue-600 text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">مكتبة الموارد المعرفية</h4>
+      <p class="text-gray-500 text-[15px] leading-relaxed">مذكرات بيداغوجية، فروض واختبارات مع التصحيح، كتب مدرسية، عروض تقديمية وفيديوهات لكل مقطع.</p>
+    </div>
+    <div class="reveal card-hover bg-white rounded-3xl p-6 border shadow-card">
+      <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-4"><i class="fa-solid fa-chart-line text-purple-600 text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">لوحة قيادة الإدارة</h4>
+      <p class="text-gray-500 text-[15px] leading-relaxed">تسيير الأساتذة والأقسام، الإعلانات، الإحصائيات والنسب، تقارير المتابعة البيداغوجية للمتوسطة.</p>
+    </div>
+    <div class="reveal card-hover bg-white rounded-3xl p-6 border shadow-card">
+      <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center mb-4"><i class="fa-solid fa-robot text-orange-600 text-2xl"></i></div>
+      <h4 class="font-black text-xl mb-2">مساعد بيداغوجي ذكي</h4>
+      <p class="text-gray-500 text-[15px] leading-relaxed">مساعد يجيب عن أسئلتك حول المنهاج، المقاطع، الكفاءات ومتطلبات المفتش في أي مادة ومستوى.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE PREVIEW INTERACTIVE -->
+<section id="guidePreview" class="bg-gradient-to-b from-primary-950 via-primary-900 to-primary-950 py-16 relative overflow-hidden">
+  <div class="absolute inset-0 pattern-bg opacity-20"></div>
+  <div class="max-w-7xl mx-auto px-4 relative">
+    <div class="text-center mb-8">
+      <span class="bg-gold-500 text-primary-950 px-4 py-1 rounded-full text-[13px] font-black">جرّب مباشرة بدون حساب</span>
+      <h3 class="text-3xl md:text-4xl font-black mt-3 text-white">استكشف <span class="text-gold-400">الدليل البيداغوجي</span> التفاعلي</h3>
+      <p class="text-primary-200 mt-2 font-semibold">اختر المستوى والمادة لعرض المقاطع والكفاءات والموارد وفق منهاج الوزارة</p>
+    </div>
+    <div class="bg-white rounded-3xl shadow-2xl p-5 md:p-8">
+      <div class="flex flex-wrap gap-2 justify-center mb-5" id="demoLevels">
+        <button onclick="setDemo('1am',this)" class="level-pill px-5 py-2.5 rounded-xl font-black text-sm border bg-gray-50">الأولى متوسط</button>
+        <button onclick="setDemo('2am',this)" class="level-pill px-5 py-2.5 rounded-xl font-black text-sm border bg-gray-50">الثانية متوسط</button>
+        <button onclick="setDemo('3am',this)" class="level-pill px-5 py-2.5 rounded-xl font-black text-sm border bg-gray-50">الثالثة متوسط</button>
+        <button onclick="setDemo('4am',this)" class="level-pill active px-5 py-2.5 rounded-xl font-black text-sm border">الرابعة متوسط</button>
+      </div>
+      <div class="flex flex-wrap gap-2 justify-center mb-6" id="demoSubjects"></div>
+      <div id="demoResult" class="grid lg:grid-cols-3 gap-4"></div>
+      <div class="text-center mt-6">
+        <button onclick="openAuth('register')" class="gold-btn text-primary-950 px-8 py-3 rounded-2xl font-black"><i class="fa-solid fa-lock-open ml-2"></i>سجّل مجاناً لفتح الدليل الكامل + المذكرات PDF</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects" class="max-w-7xl mx-auto px-4 py-16">
+  <div class="text-center mb-10 reveal">
+    <span class="bg-gold-100 text-gold-600 px-4 py-1 rounded-full text-[13px] font-black">تغطية شاملة</span>
+    <h3 class="text-3xl md:text-4xl font-black mt-3">جميع مواد <span class="grad-text">الطور المتوسط</span> بأطوارها الأربعة</h3>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="subjectsGrid"></div>
+</section>
+
+<!-- INSPECTOR -->
+<section id="inspector" class="bg-white border-y border-primary-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
+    <div class="reveal">
+      <span class="bg-primary-800 text-white px-4 py-1 rounded-full text-[13px] font-black"><i class="fa-solid fa-user-tie ml-1 text-gold-400"></i> زيارة المفتش؟ كن جاهزاً 100%</span>
+      <h3 class="text-3xl md:text-4xl font-black mt-4 mb-4">كل ما يطلبه منك <span class="grad-text">مفتش المادة</span> في مكان واحد</h3>
+      <p class="text-gray-500 leading-relaxed mb-6">قائمة تحقق ذكية تتتبع جاهزية ملفك البيداغوجي، مع نماذج جاهزة للطباعة لكل وثيقة: التوزيع السنوي، المذكرات، دفتر التنقيط، كراس التكوين...</p>
+      <div class="space-y-3" id="landingChecklist"></div>
+      <button onclick="openAuth('register')" class="grad-btn text-white px-7 py-3 rounded-2xl font-black mt-6"><i class="fa-solid fa-clipboard-check ml-2"></i>ابدأ تجهيز ملفي الآن</button>
+    </div>
+    <div class="reveal relative">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" class="rounded-3xl shadow-2xl w-full h-[480px] object-cover" alt="ملف المفتش">
+      <div class="absolute inset-0 bg-gradient-to-t from-primary-950/90 via-transparent rounded-3xl"></div>
+      <div class="absolute bottom-5 right-5 left-5 glass rounded-2xl p-4">
+        <div class="flex items-center justify-between mb-2"><p class="font-black">جاهزية الملف البيداغوجي</p><p class="font-black text-primary-700">92%</p></div>
+        <div class="w-full bg-gray-200 rounded-full h-3"><div class="progress-bar bg-gradient-to-l from-primary-600 to-gold-500 h-3 rounded-full" style="width:92%"></div></div>
+        <div class="flex gap-2 mt-3">
+          <span class="text-[11px] bg-green-100 text-green-700 px-2 py-1 rounded-lg font-bold"><i class="fa-solid fa-check ml-1"></i>التوزيع السنوي</span>
+          <span class="text-[11px] bg-green-100 text-green-700 px-2 py-1 rounded-lg font-bold"><i class="fa-solid fa-check ml-1"></i>المذكرات</span>
+          <span class="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-1 rounded-lg font-bold"><i class="fa-solid fa-clock ml-1"></i>كراس التكوين</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section id="adminSec" class="max-w-7xl mx-auto px-4 py-16">
+  <div class="grid lg:grid-cols-2 gap-10 items-center">
+    <div class="reveal order-2 lg:order-1">
+      <div class="bg-navy-900 rounded-3xl p-6 shadow-2xl text-white">
+        <div class="flex items-center justify-between mb-5">
+          <p class="font-black"><i class="fa-solid fa-gauge ml-2 text-gold-400"></i> لوحة قيادة المدير</p>
+          <span class="text-[11px] bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-bold">● متصل الآن</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="bg-white/10 rounded-2xl p-3 text-center"><p class="font-black text-2xl text-gold-400">48</p><p class="text-[11px] text-gray-300">أستاذ(ة)</p></div>
+          <div class="bg-white/10 rounded-2xl p-3 text-center"><p class="font-black text-2xl">620</p><p class="text-[11px] text-gray-300">تلميذ</p></div>
+          <div class="bg-white/10 rounded-2xl p-3 text-center"><p class="font-black text-2xl text-green-400">94%</p><p class="text-[11px] text-gray-300">اكتمال الملفات</p></div>
+        </div>
+        <div class="bg-white/5 rounded-2xl p-4 mb-3"><canvas id="landingChart" height="120"></canvas></div>
+        <div class="space-y-2 text-[13px]">
+          <div class="flex items-center gap-2 bg-white/5 rounded-xl p-2.5"><img src="https://ui-avatars.com/api/?name=Amine+Benali&background=0E9B4D&color=fff" class="w-8 h-8 rounded-full"><p><b>أ. أمين بن علي</b> أكمل مقطع الأشعة <span class="text-gray-400">• منذ ساعة</span></p></div>
+          <div class="flex items-center gap-2 bg-white/5 rounded-xl p-2.5"><img src="https://ui-avatars.com/api/?name=Sara+Haddad&background=D4A017&color=fff" class="w-8 h-8 rounded-full"><p><b>أ. سارة حداد</b> رفعت فروض الفصل الأول <span class="text-gray-400">• منذ 3 ساعات</span></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="bg-navy-900 text-white px-4 py-1 rounded-full text-[13px] font-black"><i class="fa-solid fa-building-columns ml-1 text-gold-400"></i> فضاء الإدارة</span>
+      <h3 class="text-3xl md:text-4xl font-black mt-4 mb-4">إدارة المتوسطة <span class="grad-text">بذكاء واحترافية</span></h3>
+      <div class="space-y-4">
+        <div class="flex gap-3"><div class="w-11 h-11 shrink-0 rounded-xl bg-primary-100 flex items-center justify-center"><i class="fa-solid fa-user-check text-primary-700"></i></div><div><p class="font-black">تسيير حسابات الأساتذة</p><p class="text-gray-500 text-sm">قبول، تفعيل، إسناد الأقسام والمواد، ومتابعة النشاط البيداغوجي.</p></div></div>
+        <div class="flex gap-3"><div class="w-11 h-11 shrink-0 rounded-xl bg-gold-100 flex items-center justify-center"><i class="fa-solid fa-bullhorn text-gold-600"></i></div><div><p class="font-black">الإعلانات والمراسلات</p><p class="text-gray-500 text-sm">نشر إعلانات للأساتذة، استدعاءات مجالس الأقسام والندوات.</p></div></div>
+        <div class="flex gap-3"><div class="w-11 h-11 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center"><i class="fa-solid fa-chart-pie text-blue-600"></i></div><div><p class="font-black">تقارير وإحصائيات</p><p class="text-gray-500 text-sm">نسب التقدم في المقاطع، جاهزية ملفات المفتش، نتائج الفروض.</p></div></div>
+      </div>
+      <button onclick="openAuth('register');selectRole('admin')" class="mt-6 bg-navy-900 text-white px-7 py-3 rounded-2xl font-black hover:bg-navy-950 transition"><i class="fa-solid fa-user-shield ml-2 text-gold-400"></i>إنشاء حساب إدارة</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="bg-primary-50/50 py-16 border-y border-primary-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <h3 class="text-3xl font-black text-center mb-8">ماذا يقول <span class="grad-text">أساتذتنا؟</span></h3>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="reveal bg-white rounded-3xl p-6 shadow-card border"><div class="text-gold-500 mb-3">★★★★★</div><p class="text-gray-600 leading-relaxed mb-4">"الدليل البيداغوجي وفّر عليّ ساعات من البحث. المقاطع والكفاءات والموارد كلها منظمة حسب منهاج الوزارة. المفتش انبهر بملفي!"</p><div class="flex items-center gap-3"><img src="https://ui-avatars.com/api/?name=Yasmine+Kaci&background=0B6B3A&color=fff" class="w-11 h-11 rounded-full"><div><p class="font-black text-sm">ياسمين قاسي</p><p class="text-[12px] text-gray-500">أستاذة رياضيات • الجزائر العاصمة</p></div></div></div>
+      <div class="reveal bg-white rounded-3xl p-6 shadow-card border"><div class="text-gold-500 mb-3">★★★★★</div><p class="text-gray-600 leading-relaxed mb-4">"سجلت بالفيسبوك في ثوانٍ. التوزيع السنوي والمذكرات جاهزة للطباعة. أفضل منصة للأستاذ الجزائري بلا منازع."</p><div class="flex items-center gap-3"><img src="https://ui-avatars.com/api/?name=Mohamed+Ziani&background=D4A017&color=fff" class="w-11 h-11 rounded-full"><div><p class="font-black text-sm">محمد زياني</p><p class="text-[12px] text-gray-500">أستاذ علوم طبيعية • وهران</p></div></div></div>
+      <div class="reveal bg-white rounded-3xl p-6 shadow-card border"><div class="text-gold-500 mb-3">★★★★★</div><p class="text-gray-600 leading-relaxed mb-4">"كمدير متوسطة، لوحة الإدارة غيّرت طريقة عملنا. أتابع تقدم الأساتذة في المقاطع وأرسل الإعلانات بضغطة زر."</p><div class="flex items-center gap-3"><img src="https://ui-avatars.com/api/?name=Rachid+Boumediene&background=0F172A&color=fff" class="w-11 h-11 rounded-full"><div><p class="font-black text-sm">رشيد بومدين</p><p class="text-[12px] text-gray-500">مدير متوسطة • سطيف</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <div class="reveal bg-gradient-to-l from-primary-900 via-primary-800 to-primary-900 rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
+    <div class="absolute top-0 right-10 w-40 h-40 bg-gold-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+    <h3 class="text-3xl md:text-4xl font-black text-white mb-3">انضم إلى +2,400 أستاذ ومدير يستعملون أُستاذي</h3>
+    <p class="text-primary-200 font-semibold mb-7">مجاني 100% لأساتذة التعليم العمومي • بدون بطاقة بنكية • جاهز في دقيقة</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="openAuth('register')" class="gold-btn text-primary-950 px-8 py-3.5 rounded-2xl font-black text-lg"><i class="fa-solid fa-user-plus ml-2"></i>إنشاء حساب مجاني</button>
+      <button onclick="simulateFacebook()" class="fb-btn text-white px-8 py-3.5 rounded-2xl font-black text-lg"><i class="fa-brands fa-facebook ml-2"></i>التسجيل بالفيسبوك</button>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-navy-950 text-white pt-12 pb-6">
+  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 mb-8">
+    <div><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-gold-400"></i></div><p class="font-black text-lg">أُستاذي</p></div><p class="text-gray-400 text-sm leading-relaxed">منصة جزائرية لخدمة أساتذة وإدارة الطور المتوسط وفق منهاج وزارة التربية الوطنية.</p><div class="flex gap-2 mt-4"><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1877F2] transition"><i class="fa-brands fa-facebook"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-sky-500 transition"><i class="fa-brands fa-telegram"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-500 transition"><i class="fa-brands fa-youtube"></i></a></div></div>
+    <div><p class="font-black mb-3 text-gold-400">الدليل البيداغوجي</p><ul class="space-y-2 text-sm text-gray-300"><li><a href="#" class="hover:text-white">المقاطع التعليمية</a></li><li><a href="#" class="hover:text-white">الموارد المعرفية</a></li><li><a href="#" class="hover:text-white">الكفاءات المستهدفة</a></li><li><a href="#" class="hover:text-white">منهاج الجيل الثاني</a></li></ul></div>
+    <div><p class="font-black mb-3 text-gold-400">الفضاءات</p><ul class="space-y-2 text-sm text-gray-300"><li><a href="#" class="hover:text-white">فضاء الأستاذ</a></li><li><a href="#" class="hover:text-white">فضاء الإدارة</a></li><li><a href="#" class="hover:text-white">ملف المفتش</a></li><li><a href="#" class="hover:text-white">المكتبة البيداغوجية</a></li></ul></div>
+    <div><p class="font-black mb-3 text-gold-400">اتصل بنا</p><ul class="space-y-2 text-sm text-gray-300"><li><i class="fa-solid fa-location-dot ml-2 text-primary-400"></i>الجزائر العاصمة، الجزائر</li><li><i class="fa-solid fa-envelope ml-2 text-primary-400"></i>contact@oustadi.dz</li><li><i class="fa-solid fa-phone ml-2 text-primary-400"></i>0550 00 00 00</li></ul></div>
+  </div>
+  <div class="border-t border-white/10 pt-4 text-center text-[13px] text-gray-400">© 2026 منصة أُستاذي — جميع الحقوق محفوظة • صُنع بفخر في الجزائر <span class="text-green-500">●</span><span class="text-white">●</span><span class="text-red-400">●</span></div>
+</footer>
+</div>
+
+<!-- ==================== APP SHELL ==================== -->
+<div id="app" class="hidden min-h-screen bg-sand">
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="no-print fixed lg:static inset-y-0 right-0 z-40 w-72 bg-white border-l shadow-xl transform translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+      <div class="p-5 border-b bg-gradient-to-l from-primary-900 to-primary-800 text-white">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-gold-400 text-xl"></i></div>
+          <div><p class="font-black">أُستاذي</p><p class="text-[11px] text-primary-200" id="sideRoleLabel">فضاء الأستاذ</p></div>
+        </div>
+        <div class="mt-4 bg-white/10 rounded-2xl p-3 flex items-center gap-3">
+          <img id="sideAvatar" src="" class="w-11 h-11 rounded-full border-2 border-gold-400">
+          <div class="flex-1 min-w-0"><p class="font-black text-sm truncate" id="sideName">-</p><p class="text-[11px] text-primary-200 truncate" id="sideEmail">-</p></div>
+        </div>
+      </div>
+      <nav class="flex-1 overflow-y-auto p-3 space-y-1" id="sideNav"></nav>
+      <div class="p-3 border-t">
+        <button onclick="logout()" class="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 py-2.5 rounded-xl font-bold hover:bg-red-100 transition"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</button>
+      </div>
+    </aside>
+    <div id="sideOverlay" onclick="toggleSidebar(false)" class="no-print hidden fixed inset-0 bg-black/40 z-30 lg:hidden"></div>
+
+    <!-- MAIN -->
+    <div class="flex-1 min-w-0">
+      <header class="no-print sticky top-0 z-20 glass border-b px-4 py-3 flex items-center gap-3">
+        <button onclick="toggleSidebar(true)" class="lg:hidden w-10 h-10 rounded-xl bg-primary-50 text-primary-800"><i class="fa-solid fa-bars"></i></button>
+        <div class="flex-1 relative max-w-md">
+          <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input id="globalSearch" oninput="handleGlobalSearch(this.value)" placeholder="ابحث عن مقطع، مورد، مذكرة..." class="w-full bg-gray-50 border rounded-xl py-2.5 pr-10 pl-4 text-sm focus:border-primary-600 focus:bg-white outline-none transition">
+        </div>
+        <div class="relative">
+          <button onclick="document.getElementById('notifDrop').classList.toggle('hidden')" class="w-10 h-10 rounded-xl bg-gray-50 border relative hover:bg-primary-50 transition"><i class="fa-solid fa-bell text-gray-600"></i><span class="absolute top-1 left-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white"></span></button>
+          <div id="notifDrop" class="hidden absolute left-0 top-12 w-80 bg-white rounded-2xl shadow-2xl border overflow-hidden z-50">
+            <p class="font-black p-4 border-b text-sm">الإشعارات <span class="text-[11px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full">4 جديدة</span></p>
+            <div class="max-h-72 overflow-y-auto" id="notifList"></div>
+          </div>
+        </div>
+        <button onclick="renderView('profile')" class="flex items-center gap-2 bg-primary-800 text-white pl-4 pr-1 py-1 rounded-xl font-bold text-sm hover:bg-primary-900 transition"><img id="topAvatar" src="" class="w-8 h-8 rounded-lg"><span id="topName" class="hidden sm:inline">-</span></button>
+      </header>
+      <main id="appContent" class="p-4 md:p-6 max-w-6xl mx-auto"></main>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AUTH MODAL ==================== -->
+<div id="authModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-center justify-center p-4 overflow-y-auto">
+  <div class="modal-panel bg-white rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden grid md:grid-cols-2 my-6">
+    <div class="bg-gradient-to-b from-primary-900 via-primary-800 to-primary-950 p-8 text-white relative overflow-hidden hidden md:flex flex-col justify-between">
+      <div class="absolute -top-10 -left-10 w-48 h-48 bg-gold-500/20 rounded-full blur-3xl"></div>
+      <div>
+        <div class="flex items-center gap-2 mb-6"><div class="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-gold-400 text-xl"></i></div><p class="font-black text-xl">أُستاذي</p></div>
+        <h3 class="text-2xl font-black leading-snug mb-3">انضم إلى أكبر مجتمع لأساتذة المتوسط في الجزائر</h3>
+        <div class="space-y-3 text-[14px]">
+          <div class="flex items-center gap-2 bg-white/10 rounded-xl p-2.5"><i class="fa-solid fa-check-circle text-gold-400"></i> الدليل البيداغوجي الكامل لكل المواد</div>
+          <div class="flex items-center gap-2 bg-white/10 rounded-xl p-2.5"><i class="fa-solid fa-check-circle text-gold-400"></i> ملف المفتش + التوزيع السنوي جاهز</div>
+          <div class="flex items-center gap-2 bg-white/10 rounded-xl p-2.5"><i class="fa-solid fa-check-circle text-gold-400"></i> +850 مذكرة وفرض واختبار PDF</div>
+          <div class="flex items-center gap-2 bg-white/10 rounded-xl p-2.5"><i class="fa-solid fa-check-circle text-gold-400"></i> التسجيل بالبريد أو الفيسبوك</div>
+        </div>
+      </div>
+      <p class="text-[12px] text-primary-200">مطابق لمنهاج الجيل الثاني • وزارة التربية الوطنية</p>
+    </div>
+    <div class="p-6 md:p-8 relative">
+      <button onclick="closeAuth()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-red-100 hover:text-red-600 transition"><i class="fa-solid fa-xmark"></i></button>
+      <div class="flex bg-gray-100 rounded-xl p-1 mb-5 text-sm font-black">
+        <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-lg transition">تسجيل الدخول</button>
+        <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-lg transition">حساب جديد</button>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mb-5">
+        <div id="roleTeacher" onclick="selectRole('teacher')" class="role-card selected rounded-2xl p-3 text-center"><i class="fa-solid fa-chalkboard-user text-2xl text-primary-700 mb-1"></i><p class="font-black text-sm">أستاذ(ة)</p><p class="text-[11px] text-gray-500">الطور المتوسط</p></div>
+        <div id="roleAdmin" onclick="selectRole('admin')" class="role-card rounded-2xl p-3 text-center"><i class="fa-solid fa-user-shield text-2xl text-gold-600 mb-1"></i><p class="font-black text-sm">الإدارة</p><p class="text-[11px] text-gray-500">مدير / مشرف / مستشار</p></div>
+      </div>
+      <button onclick="simulateFacebook()" class="fb-btn w-full text-white py-3 rounded-xl font-black mb-3"><i class="fa-brands fa-facebook ml-2 text-lg"></i>المتابعة عبر فيسبوك</button>
+      <div class="flex items-center gap-3 text-gray-400 text-[12px] font-bold my-3"><span class="flex-1 h-px bg-gray-200"></span>أو بالبريد الإلكتروني<span class="flex-1 h-px bg-gray-200"></span></div>
+      <form id="authForm" onsubmit="return handleAuthSubmit(event)">
+        <div id="nameField" class="mb-3"><label class="text-[13px] font-bold text-gray-600">الاسم الكامل *</label><input id="fName" type="text" placeholder="مثال: أمين بن علي" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none"></div>
+        <div class="mb-3"><label class="text-[13px] font-bold text-gray-600">البريد الإلكتروني *</label><input id="fEmail" type="email" placeholder="example@mail.dz" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none" dir="ltr" style="text-align:right"></div>
+        <div class="grid grid-cols-2 gap-3" id="extraFields">
+          <div><label class="text-[13px] font-bold text-gray-600">الولاية</label><select id="fWilaya" class="mt-1 w-full border rounded-xl px-3 py-2.5 text-sm focus:border-primary-600 outline-none"></select></div>
+          <div><label class="text-[13px] font-bold text-gray-600" id="fSubjectLabel">مادة التدريس</label><select id="fSubject" class="mt-1 w-full border rounded-xl px-3 py-2.5 text-sm focus:border-primary-600 outline-none"></select></div>
+        </div>
+        <div class="mb-3 mt-3"><label class="text-[13px] font-bold text-gray-600">كلمة المرور *</label><div class="relative"><input id="fPass" type="password" placeholder="••••••••" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none" dir="ltr" style="text-align:right"><button type="button" onclick="togglePass()" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 mt-0.5"><i class="fa-solid fa-eye" id="passEye"></i></button></div></div>
+        <p id="authError" class="hidden text-[13px] bg-red-50 text-red-600 rounded-xl p-2.5 mb-3 font-bold"></p>
+        <button type="submit" id="authSubmitBtn" class="grad-btn w-full text-white py-3 rounded-xl font-black">إنشاء الحساب</button>
+      </form>
+      <div class="mt-4 bg-gray-50 border rounded-2xl p-3">
+        <p class="text-[12px] font-black text-gray-500 mb-2"><i class="fa-solid fa-bolt text-gold-500 ml-1"></i> حسابات تجريبية — دخول فوري:</p>
+        <div class="flex gap-2">
+          <button onclick="quickDemo('teacher')" class="flex-1 text-[12px] bg-primary-800 text-white py-2 rounded-xl font-bold">أستاذ تجريبي</button>
+          <button onclick="quickDemo('admin')" class="flex-1 text-[12px] bg-navy-900 text-white py-2 rounded-xl font-bold">إدارة تجريبية</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FB OAUTH SIM -->
+<div id="fbModal" class="hidden fixed inset-0 z-[110] modal-bg flex items-center justify-center p-4">
+  <div class="modal-panel bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden">
+    <div class="bg-[#1877F2] p-4 flex items-center gap-3"><i class="fa-brands fa-facebook text-white text-3xl"></i><div><p class="text-white font-black">تسجيل الدخول بحساب فيسبوك</p><p class="text-blue-100 text-[12px]">facebook.com • اتصال آمن</p></div></div>
+    <div class="p-6" id="fbBody">
+      <div class="flex items-center gap-3 bg-gray-50 border rounded-2xl p-3 mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-gold-400 text-xl"></i></div><div><p class="font-black text-sm">أُستاذي — Oustadi</p><p class="text-[12px] text-gray-500">يطلب الوصول إلى: الاسم، البريد، الصورة</p></div></div>
+      <input id="fbEmail" type="text" placeholder="البريد أو رقم الهاتف" class="w-full border rounded-xl px-4 py-2.5 text-sm mb-3 focus:border-[#1877F2] outline-none">
+      <input id="fbPass" type="password" placeholder="كلمة سر فيسبوك" class="w-full border rounded-xl px-4 py-2.5 text-sm mb-4 focus:border-[#1877F2] outline-none">
+      <button onclick="completeFacebook()" class="fb-btn w-full text-white py-2.5 rounded-xl font-black">تسجيل الدخول</button>
+      <p class="text-center text-[11px] text-gray-400 mt-3"><i class="fa-solid fa-lock ml-1"></i> محاكاة آمنة — لا يتم إرسال أي بيانات</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div class="no-print fixed bottom-5 left-5 z-[90]">
+  <div id="chatPanel" class="hidden mb-3 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border overflow-hidden">
+    <div class="bg-gradient-to-l from-primary-800 to-primary-700 p-4 flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full bg-gold-500 flex items-center justify-center"><i class="fa-solid fa-robot text-primary-950 text-xl"></i></div>
+      <div class="flex-1"><p class="text-white font-black text-sm">مرشد — المساعد البيداغوجي</p><p class="text-primary-200 text-[11px]">● متصل • يجيب عن المنهاج والمفتش</p></div>
+      <button onclick="toggleChat(false)" class="text-white/70 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="chatMsgs" class="h-72 overflow-y-auto p-4 space-y-3 bg-gray-50"></div>
+    <div class="p-3 border-t flex gap-2">
+      <input id="chatInput" onkeypress="if(event.key==='Enter')sendChat()" placeholder="اسأل عن مقطع، كفاءة، ملف المفتش..." class="flex-1 border rounded-xl px-3 py-2 text-sm outline-none focus:border-primary-600">
+      <button onclick="sendChat()" class="w-10 h-10 rounded-xl grad-btn text-white shrink-0"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gradient-to-br from-primary-700 to-primary-900 shadow-2xl text-white relative hover:scale-110 transition"><i class="fa-solid fa-robot text-2xl"></i><span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-[10px] font-black flex items-center justify-center border-2 border-white">1</span></button>
+</div>
+
+<div id="toastBox" class="no-print fixed top-4 left-1/2 -translate-x-1/2 z-[120] space-y-2 w-[92%] max-w-md"></div>
+<div id="printArea"></div>
+
+<script>
+/* ============================================================
+   OUSTADI PLATFORM — Full Logic
+============================================================ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+/* ---------- STATIC DATA ---------- */
+const LEVELS = {'1am':{name:'الأولى متوسط',short:'1AM'},'2am':{name:'الثانية متوسط',short:'2AM'},'3am':{name:'الثالثة متوسط',short:'3AM'},'4am':{name:'الرابعة متوسط — BEM',short:'4AM'}};
+const SUBJECTS = [
+  {id:'math',name:'الرياضيات',icon:'fa-square-root-variable',color:'#0B6B3A',coef:{'1am':4,'2am':4,'3am':4,'4am':4},hours:'5 سا / أسبوع'},
+  {id:'arabic',name:'اللغة العربية',icon:'fa-language',color:'#B45309',coef:{'1am':5,'2am':5,'3am':5,'4am':5},hours:'6 سا / أسبوع'},
+  {id:'french',name:'اللغة الفرنسية',icon:'fa-eiffel-tower',color:'#2563EB',coef:{'1am':4,'2am':4,'3am':4,'4am':4},hours:'5 سا / أسبوع'},
+  {id:'english',name:'اللغة الإنجليزية',icon:'fa-globe',color:'#7C3AED',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'3 سا / أسبوع'},
+  {id:'science',name:'العلوم الطبيعية',icon:'fa-dna',color:'#059669',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'2 سا / أسبوع'},
+  {id:'physics',name:'العلوم الفيزيائية',icon:'fa-atom',color:'#DC2626',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'2 سا / أسبوع'},
+  {id:'islamic',name:'التربية الإسلامية',icon:'fa-moon',color:'#0D9488',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'2 سا / أسبوع'},
+  {id:'history',name:'التاريخ والجغرافيا',icon:'fa-landmark',color:'#92400E',coef:{'1am':3,'2am':3,'3am':3,'4am':3},hours:'3 سا / أسبوع'},
+  {id:'civics',name:'التربية المدنية',icon:'fa-scale-balanced',color:'#1D4ED8',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'1 سا / أسبوع'},
+  {id:'info',name:'الإعلام الآلي',icon:'fa-computer',color:'#334155',coef:{'1am':2,'2am':2,'3am':2,'4am':2},hours:'1 سا / أسبوع'},
+];
+const MAQATI3 = {
+  math:{'1am':['الأعداد الطبيعية والعشرية','الكسور والعمليات عليها','الزوايا والمستقيمات','المضلعات والمحيط والمساحة','المعطيات والإحصاء'],'2am':['الأعداد الناطقة','الكسور والتناسبية','المثلثات والارتفاعات','متوازي الأضلاع والمساحات','الإحصاء'],'3am':['الأعداد الناطقة والعمليات','القوى والجذور التربيعية','المثلثات والدائرة','الأشعة والانسحاب','التناسبية والدوال'],'4am':['الأعداد الطبيعية والناطقة','الحساب الحرفي والمعادلات','نظرية فيثاغورس والمثلث القائم','الأشعة والانسحاب والدوران','الدوال الخطية والتآلفية وجملة معادلتين','الإحصاء والاحتمالات والهندسة في الفضاء']},
+  arabic:{'1am':['الحياة العائلية','الحياة المدرسية','الهوية الوطنية','الطبيعة والبيئة','الصحة والرياضة'],'2am':['الحياة الاجتماعية','الإعلام والاتصال','حب الوطن','الطبيعة','عظماء الإنسانية'],'3am':['الإعلام والمجتمع','الآفات الاجتماعية','التضامن الإنساني','العلم والتقدم','التراث والهوية'],'4am':['عظماء الإنسانية','الإعلام والمجتمع','التضامن والعمل الإنساني','الآفات الاجتماعية','العلم والتطور التكنولوجي','الثقافة والهوية الوطنية']},
+  french:{'1am':['La vie familiale','La vie scolaire','L\u2019identité nationale','La nature','La santé et le sport'],'2am':['La vie sociale','Les médias','L\u2019amour de la patrie','La science','Les grands hommes'],'3am':['Les médias et la société','Les fléaux sociaux','La solidarité','Le progrès scientifique','Le patrimoine'],'4am':['Les grandes personnalités','Les médias et la société','La solidarité humaine','Les fléaux sociaux','Science et technologie']},
+  english:{'1am':['Family and Friends','School Life','National Identity','Nature','Health and Sports'],'2am':['Social Life','Media','My Country','Science','Famous People'],'3am':['Media and Society','Social Issues','Solidarity','Scientific Progress','Heritage'],'4am':['Great Personalities','Media and Society','Solidarity at Work','Social Scourges','Science and Technology']},
+  science:{'1am':['الوسط الحي','التغذية عند الإنسان','التغذية عند النبات','التكاثر','البيئة والتوازن'],'2am':['الوسط الحي والعلاقات','التغذية والنمو','التكاثر والوراثة','الإنسان والمحيط','الصحة والوقاية'],'3am':['التغذية','التنفس والدوران','الإطراح','الجهاز العصبي','التكاثر'],'4am':['التغذية عند الإنسان','الاتصال العصبي','الاتصال الهرموني والمناعة','الوراثة','الإنسان والمحيط']},
+  physics:{'1am':['المادة وتحولاتها','القياسات والأطوال','الكتلة والحجم','الحالات الفيزيائية','الخلائط'],'2am':['الظواهر الكهربائية','الدارات البسيطة','المغناطيسية','الحركة والسكون','القوة والوزن'],'3am':['التوتر والتيار','المقاومة وقانون أوم','الطاقة وتحولاتها','الشوارد والمحاليل','الحركة والقوة'],'4am':['الدارات الكهربائية','الأمن الكهربائي','الشوارد والمحاليل الشاردية','الفعل المتبادل والحركة','الظواهر الميكانيكية']},
+  islamic:{'1am':['القرآن والعبادات','الإيمان وأركانه','السيرة النبوية','الأخلاق والآداب','الأسرة في الإسلام'],'2am':['القرآن والتجويد','العقيدة','العبادات','السيرة والخلفاء','المعاملات'],'3am':['القرآن وعلومه','التوحيد','الفقه والعبادات','الحضارة الإسلامية','القيم الأخلاقية'],'4am':['القرآن الكريم','العقيدة والتوحيد','العبادات والمعاملات','السيرة النبوية','الأخلاق والقيم']},
+  history:{'1am':['ما قبل التاريخ','الدولة الجزائرية القديمة','الخريطة والجغرافيا','السكان والأنشطة','الجزائر الموقع والحدود'],'2am':['الدولة الإسلامية','الجزائر في العهد العثماني','المناخ والتضاريس','السكان والمدن','الاقتصاد الوطني'],'3am':['الاستعمار والمقاومة','الحركة الوطنية','الحرب العالمية والجزائر','الجغرافيا العامة','التنمية والبيئة'],'4am':['المقاومة الشعبية','الحركة الوطنية وثورة نوفمبر','الاستقلال وبناء الدولة','الجزائر والعالم','التنمية المستدامة']},
+  civics:{'1am':['الهوية والمواطنة','الحياة المدرسية','الحقوق والواجبات','الدولة والمؤسسات','البيئة والمواطنة'],'2am':['المواطنة والديمقراطية','المؤسسات الوطنية','الحقوق والحريات','العمل الجمعوي','التربية المرورية'],'3am':['الدستور والمؤسسات','الحياة الديمقراطية','حقوق الإنسان','المواطنة العالمية','التنمية والمواطنة'],'4am':['الدستور الجزائري','مؤسسات الدولة','الحياة السياسية','حقوق الإنسان والمواطن','المواطنة والسلوك المدني']},
+  info:{'1am':['الحاسوب ومكوناته','نظام التشغيل','معالج النصوص','الرسم والوسائط','الأنترنت والسلامة'],'2am':['الشبكات','النصوص المتقدم','الجداول الإلكترونية','العروض التقديمية','سكراتش'],'3am':['الخوارزميات','البرمجة بسكراتش','الجداول والرسوم','البحث في الأنترنت','أمن المعلومات'],'4am':['الخوارزميات والبرمجة','مدخل إلى بايثون','قواعد البيانات','الشبكات والأنترنت','مشروع تكنولوجي']},
+};
+const GLOBAL_COMP = {
+  math:'حل وضعيات مشكلة دالة بتوظيف الأعداد والحساب الحرفي والدوال والهندسة، مع البرهنة والتواصل الرياضي السليم.',
+  arabic:'التواصل السليم شفهياً وكتابياً: فهم المقروء والمسموع وإنتاج نصوص متنوعة بلغة سليمة مع تذوق النصوص الأدبية.',
+  french:'Communiquer correctement à l\u2019oral et à l\u2019écrit : comprendre et produire des textes variés en langue correcte.',
+  english:'Communicate effectively: understand and produce oral and written texts using appropriate language functions.',
+  science:'تفسير الظواهر الطبيعية بمنهج علمي: الملاحظة، التجريب، الاستدلال، وتبني سلوكات صحية وبيئية سليمة.',
+  physics:'تفسير الظواهر الفيزيائية والتكنولوجية بمنهج تجريبي: القياس، النمذجة، والتحكم في الأمن الكهربائي.',
+  islamic:'الالتزام بالقيم الإسلامية: حفظ وفهم النصوص الشرعية وتوظيفها في السلوك اليومي والمعاملات.',
+  history:'التموقع في الزمان والمكان: فهم الأحداث التاريخية وتحليل المجال الجغرافي بروح المواطنة.',
+  civics:'التصرف كمواطن صالح: معرفة الحقوق والواجبات واحترام القانون والمؤسسات والمشاركة في الحياة العامة.',
+  info:'استعمال تكنولوجيا الإعلام والاتصال بفعالية وأمان: الإنتاج الرقمي، البرمجة، وحماية المعطيات.'
+};
+const INSPECTOR_DOCS = [
+  {cat:'التخطيط السنوي',items:[
+    {t:'التوزيع السنوي للمادة',d:'مؤشر من المدير، مطابق لمخططات الوزارة 2025-2026'},
+    {t:'المخطط السنوي للتعلمات (التدرج)',d:'مخططات وزارة التربية الرسمية لكل مقطع'},
+    {t:'استعمال الزمن + قائمة الأقسام المسندة',d:'نسخة مؤشرة من الإدارة'}]},
+  {cat:'التحضير اليومي',items:[
+    {t:'دفتر التحضير اليومي (المذكرات)',d:'مذكرة لكل حصة: الكفاءة المستهدفة، الوضعية الأم، سير الدرس، التقويم'},
+    {t:'دفتر النصوص Cahier de textes',d:'مملوء بانتظام ومؤشر من المدير'},
+    {t:'بطاقة التقويم التشخيصي',d:'نتائج تقويم بداية السنة + خطة المعالجة'}]},
+  {cat:'التقويم والمتابعة',items:[
+    {t:'دفتر التنقيط',d:'نقاط الفروض والاختبارات والمراقبة المستمرة لكل تلميذ'},
+    {t:'ملف الفروض والاختبارات',d:'المواضيع + التصحيح النموذجي + سلم التنقيط + نسب النجاح'},
+    {t:'ملف المعالجة البيداغوجية',d:'قوائم أفواج المعالجة + بطاقات المتابعة'}]},
+  {cat:'التكوين والوثائق',items:[
+    {t:'كراس التكوين والندوات',d:'محاضر الندوات الداخلية والخارجية + العمليات التكوينية'},
+    {t:'الوثائق الرسمية',d:'المنهاج + الدليل + الكتاب المدرسي + المناشير'},
+    {t:'كشف الغيابات والسلوك',d:'متابعة مواظبة التلاميذ'}]},
+];
+const WILAYAS = ['الجزائر','وهران','سطيف','قسنطينة','عنابة','البليدة','تيزي وزو','تلمسان','بجاية','ورقلة','مستغانم','سكيكدة','جيجل','تيارت','المسيلة','البويرة','الأغواط','باتنة','بسكرة','أدرار','الشلف','معسكر','أم البواقي','قالمة','أخرى'];
+const STUDENTS = ['أحمد بن يوسف','مريم زروقي','يوسف حمداني','فاطمة بلقاسم','عبد النور مرابط','خديجة سعدي','محمد الأمين بوعزيز','نور الهدى قادري','ريان شريف','إيمان بوزيد','عبد الرؤوف لعمامرة','سيرين منصوري','أيوب فرحات','لينا عثماني','إسلام بن عمار','جود حركات','أنس بلحاج','وissam مرابط'.replace('wissam','وسام'),'دنيا زيتوني','أمينة قاسمي'];
+const NOTIFS = [
+  {i:'fa-bullhorn',c:'bg-gold-100 text-gold-600',t:'إعلان من الإدارة: مجلس القسم يوم الخميس 10:00',time:'منذ ساعة'},
+  {i:'fa-file-circle-check',c:'bg-green-100 text-green-600',t:'تمت المصادقة على توزيعك السنوي — رياضيات 4م',time:'منذ 3 ساعات'},
+  {i:'fa-user-tie',c:'bg-blue-100 text-blue-600',t:'تذكير: زيارة المفتش الأسبوع القادم — راجع ملفك',time:'أمس'},
+  {i:'fa-book',c:'bg-purple-100 text-purple-600',t:'مذكرات جديدة: مقطع الدوال الخطية متاحة الآن',time:'أمس'},
+];
+
+/* ---------- STATE ---------- */
+let state = {user:null, view:'dashboard', authTab:'register', authRole:'teacher', guideLevel:'4am', guideSubject:'math', guideTerm:'all', guideTab:'maqati3', expanded:0, demoLevel:'4am', demoSubject:'math', charts:[], libFilter:'all', libSearch:'', gradesClass:'4م1'};
+let users = JSON.parse(localStorage.getItem('oustadi_users')||'[]');
+if(!users.find(u=>u.email==='prof@ecole.dz')){
+  users.push({id:'u1',name:'أمين بن علي',email:'prof@ecole.dz',pass:'prof123',role:'teacher',subject:'math',wilaya:'الجزائر',avatar:'https://ui-avatars.com/api/?name=Amine+Benali&background=0B6B3A&color=fff&bold=true',created:'2025-09-01',status:'active'});
+  users.push({id:'u2',name:'رشيد بومدين',email:'admin@ecole.dz',pass:'admin123',role:'admin',subject:'إدارة',wilaya:'سطيف',avatar:'https://ui-avatars.com/api/?name=Rachid+Boumediene&background=0F172A&color=fff&bold=true',created:'2025-08-15',status:'active'});
+  users.push({id:'u3',name:'سارة حداد',email:'sara@ecole.dz',pass:'123456',role:'teacher',subject:'arabic',wilaya:'وهران',avatar:'https://ui-avatars.com/api/?name=Sara+Haddad&background=D4A017&color=fff&bold=true',created:'2025-09-10',status:'active'});
+  users.push({id:'u4',name:'ياسين مرابط',email:'yacine@ecole.dz',pass:'123456',role:'teacher',subject:'physics',wilaya:'قسنطينة',avatar:'https://ui-avatars.com/api/?name=Yacine+Merabet&background=DC2626&color=fff&bold=true',created:'2026-01-05',status:'pending'});
+  localStorage.setItem('oustadi_users',JSON.stringify(users));
+}
+let announcements = JSON.parse(localStorage.getItem('oustadi_ann')||'null') || [
+  {id:1,title:'مجلس القسم للفصل الأول',body:'ينعقد مجلس القسم يوم الخميس على الساعة 10:00. يرجى تحضير كشوف النقاط ونسب النجاح.',date:'2026-01-08',author:'الإدارة',pin:true},
+  {id:2,title:'ندوة داخلية: المعالجة البيداغوجية',body:'ندوة تكوينية حول المعالجة البيداغوجية من تأطير مفتش المادة يوم الثلاثاء.',date:'2026-01-05',author:'الإدارة',pin:false},
+  {id:3,title:'رزنامة الفروض المحروسة',body:'تنطلق فروض الفصل الثاني بتاريخ 20 جانفي. يجب إيداع المواضيع قبل 15 جانفي.',date:'2026-01-02',author:'الإدارة',pin:false},
+];
+const saveUsers = ()=>localStorage.setItem('oustadi_users',JSON.stringify(users));
+const saveAnn = ()=>localStorage.setItem('oustadi_ann',JSON.stringify(announcements));
+const subjName = id => (SUBJECTS.find(s=>s.id===id)||{name:id}).name;
+const toast = (msg,type='success')=>{
+  const colors={success:'bg-primary-800',error:'bg-red-600',info:'bg-navy-900',gold:'bg-gold-500 !text-primary-950'};
+  const icons={success:'fa-circle-check',error:'fa-circle-exclamation',info:'fa-circle-info',gold:'fa-star'};
+  const el=document.createElement('div');
+  el.className=`toast ${colors[type]} text-white rounded-2xl px-4 py-3 shadow-2xl flex items-center gap-3 font-bold text-sm`;
+  el.innerHTML=`<i class="fa-solid ${icons[type]} text-lg"></i><span>${msg}</span>`;
+  $('#toastBox').appendChild(el); setTimeout(()=>{el.style.opacity='0';el.style.transition='.4s';setTimeout(()=>el.remove(),400)},3400);
+};
+const scrollToId = id => document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+
+/* ---------- CURRICULUM BUILDER ---------- */
+function buildMaqati3(subj,lvl){
+  const titles = MAQATI3[subj][lvl]||[];
+  const weeks=[6,5,6,5,6,5];
+  return titles.map((title,i)=>{
+    const term = i<Math.ceil(titles.length/3)?1:(i<Math.ceil(titles.length*2/3)?2:3);
+    return {
+      id:i, title, term, weeks:weeks[i%weeks.length],
+      competence:`أن يكون المتعلم قادراً على توظيف مكتسباته حول «${title}» في حل وضعيات مشكلة دالة ومركبة، مع التعليل والتواصل السليم بلغة المادة.`,
+      sitDepart:`وضعية انطلاق شاملة للمقطع: مشكلة من الحياة اليومية تستدعي تعبئة موارد «${title}» وتثير دافعية المتعلمين (عرض، صورة، إحصائية، نص...).`,
+      lessons:[`مدخل تشخيصي: تقويم المكتسبات القبلية حول ${title}`,`${title} — المفاهيم الأساسية (1)`,`${title} — المفاهيم الأساسية (2)`,`تطبيقات وتمارين منهجية حول ${title}`,`إدماج جزئي + معالجة بيداغوجية`,`تقويم المقطع: وضعية إدماجية تقويمية`],
+      resources:['الكتاب المدرسي الرسمي','دليل الأستاذ — الجيل الثاني','مذكرة بيداغوجية نموذجية','عرض تقديمي تفاعلي','ورقة عمل للتلاميذ','فيديو تعليمي + تمارين تفاعلية'],
+      integration:`وضعية إدماجية: إنتاج / حل مركب يوظف كل موارد مقطع «${title}» مع شبكة تقويم ومعايير النجاح.`,
+      eval:`تقويم: فرض محروس + تقويم مستمر (مشاركة، واجبات، سلوك) وفق شبكة وزارة التربية.`
+    };
+  });
+}
+
+/* ---------- LANDING RENDER ---------- */
+function renderLanding(){
+  // hero maqati3
+  $('#heroMaqati3').innerHTML = buildMaqati3('math','4am').slice(0,4).map((m,i)=>`
+    <div class="flex items-center gap-3 bg-gray-50 border rounded-xl p-2.5">
+      <span class="w-8 h-8 shrink-0 rounded-lg bg-primary-800 text-white font-black text-sm flex items-center justify-center">${i+1}</span>
+      <div class="flex-1 min-w-0"><p class="font-black text-[13px] truncate">${m.title}</p><p class="text-[11px] text-gray-500">${m.weeks} أسابيع • الفصل ${m.term}</p></div>
+      <i class="fa-solid fa-chevron-left text-gray-300"></i>
+    </div>`).join('');
+  // subjects grid
+  $('#subjectsGrid').innerHTML = SUBJECTS.map(s=>`
+    <div class="reveal card-hover bg-white rounded-3xl p-5 border shadow-card text-center cursor-pointer" onclick="openAuth('register')">
+      <div class="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:${s.color}15"><i class="fa-solid ${s.icon} text-2xl" style="color:${s.color}"></i></div>
+      <p class="font-black">${s.name}</p>
+      <p class="text-[12px] text-gray-500 font-bold mt-1">4 مستويات • معامل ${s.coef['4am']}</p>
+      <p class="text-[11px] text-primary-700 font-black mt-2">عرض الدليل <i class="fa-solid fa-arrow-left"></i></p>
+    </div>`).join('');
+  // landing checklist
+  const flat = INSPECTOR_DOCS.flatMap(c=>c.items).slice(0,5);
+  $('#landingChecklist').innerHTML = flat.map((d,i)=>`
+    <div class="flex items-center gap-3 bg-gray-50 border rounded-2xl p-3">
+      <span class="w-8 h-8 rounded-xl ${i<4?'bg-green-500':'bg-gold-500'} text-white flex items-center justify-center shrink-0"><i class="fa-solid ${i<4?'fa-check':'fa-clock'} text-sm"></i></span>
+      <div><p class="font-black text-sm">${d.t}</p><p class="text-[12px] text-gray-500">${d.d}</p></div>
+    </div>`).join('');
+  // demo subjects
+  renderDemoSubjects(); renderDemoResult();
+  // landing chart
+  setTimeout(()=>{
+    const ctx=document.getElementById('landingChart');
+    if(ctx) new Chart(ctx,{type:'bar',data:{labels:['رياضيات','عربية','فرنسية','علوم','فيزياء'],datasets:[{data:[92,88,85,90,87],backgroundColor:['#D4A017','#0E9B4D','#3B82F6','#8B5CF6','#EF4444'],borderRadius:8}]},options:{plugins:{legend:{display:false}},scales:{y:{display:false},x:{ticks:{color:'#cbd5e1',font:{size:10,family:'Cairo'}}}}}}});
+  },500);
+  // counters
+  $$('.counter').forEach(el=>{
+    const target=+el.dataset.target; let cur=0;
+    const step=()=>{cur+=Math.max(1,Math.ceil(target/60)); if(cur>=target)cur=target; el.textContent=cur; if(cur<target)requestAnimationFrame(step)};
+    setTimeout(step,600);
+  });
+  // reveal on scroll
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='none';e.target.style.transition='.7s'}}),{threshold:.1});
+  $$('.reveal').forEach(el=>obs.observe(el));
+  try{gsap.from('.hero-el',{y:30,opacity:0,duration:.8,stagger:.12,ease:'power3.out'})}catch(e){}
+}
+let demoSubj='math';
+function setDemo(lvl,btn){state.demoLevel=lvl;$$('#demoLevels .level-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDemoResult()}
+function renderDemoSubjects(){
+  $('#demoSubjects').innerHTML = SUBJECTS.map(s=>`<button onclick="demoSubj='${s.id}';renderDemoSubjects();renderDemoResult()" class="subj-chip ${s.id===demoSubj?'active':''} flex items-center gap-2 border-2 rounded-xl px-3 py-2 text-[13px] font-black bg-white"><i class="fa-solid ${s.icon}" style="color:${s.color}"></i>${s.name}</button>`).join('');
+}
+function renderDemoResult(){
+  const lvl=state.demoLevel, s=SUBJECTS.find(x=>x.id===demoSubj);
+  const mq=buildMaqati3(demoSubj,lvl);
+  $('#demoResult').innerHTML = `
+    <div class="bg-primary-900 text-white rounded-2xl p-5">
+      <p class="text-gold-400 font-black text-sm mb-2"><i class="fa-solid fa-book ml-1"></i> ${s.name} — ${LEVELS[lvl].name}</p>
+      <p class="text-[12px] text-primary-200 mb-1">الكفاءة الشاملة:</p>
+      <p class="text-[13px] leading-relaxed mb-4">${GLOBAL_COMP[demoSubj]}</p>
+      <div class="flex gap-2 text-center"><div class="flex-1 bg-white/10 rounded-xl p-2"><p class="font-black text-gold-400">${s.coef[lvl]}</p><p class="text-[11px]">المعامل</p></div><div class="flex-1 bg-white/10 rounded-xl p-2"><p class="font-black text-gold-400 text-[13px]">${s.hours}</p><p class="text-[11px]">الحجم الساعي</p></div><div class="flex-1 bg-white/10 rounded-xl p-2"><p class="font-black text-gold-400">${mq.length}</p><p class="text-[11px]">مقاطع</p></div></div>
+    </div>
+    <div class="lg:col-span-2 space-y-2 max-h-80 overflow-y-auto pl-1">
+      ${mq.map((m,i)=>`<div class="border rounded-2xl overflow-hidden"><button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full flex items-center gap-3 p-3 bg-gray-50 hover:bg-primary-50 transition text-right"><span class="w-9 h-9 shrink-0 rounded-xl bg-primary-800 text-white font-black flex items-center justify-center">${i+1}</span><div class="flex-1"><p class="font-black text-sm">المقطع ${i+1}: ${m.title}</p><p class="text-[11px] text-gray-500">${m.weeks} أسابيع • الفصل ${m.term} • ${m.lessons.length} دروس</p></div><i class="fa-solid fa-chevron-down text-gray-400 text-sm"></i></button><div class="hidden p-3 bg-white border-t text-[13px]"><p class="font-black text-primary-800 mb-1"><i class="fa-solid fa-bullseye text-gold-500 ml-1"></i>الكفاءة المستهدفة:</p><p class="text-gray-600 mb-2">${m.competence}</p><p class="font-black text-primary-800 mb-1">الدروس:</p><ul class="text-gray-600 space-y-1">${m.lessons.slice(0,4).map(l=>`<li><i class="fa-solid fa-circle text-[6px] text-primary-600 ml-2"></i>${l}</li>`).join('')}</ul></div></div>`).join('')}
+    </div>`;
+}
+
+/* ---------- AUTH ---------- */
+function openAuth(tab='register'){ $('#authModal').classList.remove('hidden'); document.body.style.overflow='hidden'; switchAuthTab(tab); }
+function closeAuth(){ $('#authModal').classList.add('hidden'); document.body.style.overflow=''; }
+function switchAuthTab(tab){
+  state.authTab=tab;
+  const L=$('#tabLogin'),R=$('#tabRegister');
+  L.className='flex-1 py-2.5 rounded-lg transition '+(tab==='login'?'bg-white shadow font-black text-primary-800':'text-gray-500');
+  R.className='flex-1 py-2.5 rounded-lg transition '+(tab==='register'?'bg-white shadow font-black text-primary-800':'text-gray-500');
+  $('#nameField').style.display=tab==='register'?'block':'none';
+  $('#extraFields').style.display=tab==='register'?'grid':'none';
+  $('#authSubmitBtn').textContent=tab==='register'?'إنشاء الحساب':'تسجيل الدخول';
+  $('#authError').classList.add('hidden');
+}
+function selectRole(r){
+  state.authRole=r;
+  $('#roleTeacher').classList.toggle('selected',r==='teacher');
+  $('#roleAdmin').classList.toggle('selected',r==='admin');
+  $('#fSubjectLabel').textContent=r==='teacher'?'مادة التدريس':'الوظيفة';
+  fillSubjectSelect();
+}
+function fillSubjectSelect(){
+  const sel=$('#fSubject');
+  if(state.authRole==='teacher') sel.innerHTML=SUBJECTS.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  else sel.innerHTML=['مدير متوسطة','نائب المدير','مستشار التربية','مشرف تربوي','مقتصد'].map(f=>`<option>${f}</option>`).join('');
+}
+function togglePass(){const p=$('#fPass');p.type=p.type==='password'?'text':'password';$('#passEye').classList.toggle('fa-eye-slash')}
+function showAuthError(m){const e=$('#authError');e.textContent=m;e.classList.remove('hidden')}
+function handleAuthSubmit(e){
+  e.preventDefault();
+  const email=$('#fEmail').value.trim().toLowerCase(), pass=$('#fPass').value, name=$('#fName').value.trim();
+  if(!email||!pass) return showAuthError('يرجى ملء البريد الإلكتروني وكلمة المرور.');
+  if(state.authTab==='register'){
+    if(!name) return showAuthError('يرجى إدخال الاسم الكامل.');
+    if(pass.length<6) return showAuthError('كلمة المرور يجب أن تكون 6 أحرف على الأقل.');
+    if(users.find(u=>u.email===email)) return showAuthError('هذا البريد مسجل مسبقاً. جرّب تسجيل الدخول.');
+    const colors=['0B6B3A','D4A017','0F172A','7C3AED','DC2626'];
+    const user={id:'u'+Date.now(),name,email,pass,role:state.authRole,subject:$('#fSubject').value,wilaya:$('#fWilaya').value,avatar:`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${colors[Math.floor(Math.random()*colors.length)]}&color=fff&bold=true`,created:new Date().toISOString().slice(0,10),status:state.authRole==='admin'?'pending':'active'};
+    users.push(user); saveUsers();
+    closeAuth(); enterApp(user);
+    toast(`مرحباً ${name}! تم إنشاء حساب ${state.authRole==='teacher'?'الأستاذ':'الإدارة'} بنجاح`);
+  }else{
+    const u=users.find(x=>x.email===email&&x.pass===pass);
+    if(!u) return showAuthError('بيانات الدخول غير صحيحة. تحقق من البريد وكلمة المرور.');
+    if(u.status==='suspended') return showAuthError('تم تعليق حسابك. تواصل مع إدارة المتوسطة.');
+    closeAuth(); enterApp(u); toast(`مرحباً بعودتك، ${u.name}!`);
+  }
+  return false;
+}
+function quickDemo(role){
+  closeAuth();
+  const u = role==='teacher'?users.find(x=>x.email==='prof@ecole.dz'):users.find(x=>x.email==='admin@ecole.dz');
+  enterApp(u); toast(`وضع التجربة: ${role==='teacher'?'فضاء الأستاذ':'فضاء الإدارة'}`,'gold');
+}
+/* Facebook */
+function simulateFacebook(){$('#fbModal').classList.remove('hidden')}
+function completeFacebook(){
+  const em=$('#fbEmail').value.trim()||'fb.user@facebook.com';
+  const name=(em.split('@')[0]||'مستخدم فيسبوك').replace(/[._-]/g,' ');
+  $('#fbBody').innerHTML=`<div class="text-center py-6"><i class="fa-solid fa-circle-notch fa-spin text-4xl text-[#1877F2] mb-3"></i><p class="font-black">جارٍ التحقق من حساب فيسبوك...</p></div>`;
+  setTimeout(()=>{
+    $('#fbModal').classList.add('hidden'); closeAuth();
+    $('#fbBody').innerHTML=`<div class="flex items-center gap-3 bg-gray-50 border rounded-2xl p-3 mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center"><i class="fa-solid fa-graduation-cap text-gold-400 text-xl"></i></div><div><p class="font-black text-sm">أُستاذي — Oustadi</p><p class="text-[12px] text-gray-500">يطلب الوصول إلى: الاسم، البريد، الصورة</p></div></div><input id="fbEmail" type="text" placeholder="البريد أو رقم الهاتف" class="w-full border rounded-xl px-4 py-2.5 text-sm mb-3 focus:border-[#1877F2] outline-none"><input id="fbPass" type="password" placeholder="كلمة سر فيسبوك" class="w-full border rounded-xl px-4 py-2.5 text-sm mb-4 focus:border-[#1877F2] outline-none"><button onclick="completeFacebook()" class="fb-btn w-full text-white py-2.5 rounded-xl font-black">تسجيل الدخول</button><p class="text-center text-[11px] text-gray-400 mt-3"><i class="fa-solid fa-lock ml-1"></i> محاكاة آمنة — لا يتم إرسال أي بيانات</p>`;
+    let u=users.find(x=>x.email===em.toLowerCase());
+    if(!u){u={id:'u'+Date.now(),name:name,email:em.toLowerCase(),pass:'fb',role:state.authRole,subject:state.authRole==='teacher'?'math':'مدير متوسطة',wilaya:'الجزائر',avatar:`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1877F2&color=fff&bold=true`,created:new Date().toISOString().slice(0,10),status:'active',via:'facebook'};users.push(u);saveUsers();toast(`تم إنشاء حسابك عبر فيسبوك، ${name}!`,'info')}
+    else toast(`مرحباً بعودتك عبر فيسبوك، ${u.name}!`,'info');
+    enterApp(u);
+  },1600);
+}
+
+/* ---------- APP SHELL ---------- */
+function enterApp(user){
+  state.user=user; localStorage.setItem('oustadi_session',user.id);
+  $('#landing').classList.add('hidden'); $('#app').classList.remove('hidden');
+  $('#sideName').textContent=user.name; $('#sideEmail').textContent=user.email;
+  $('#sideAvatar').src=user.avatar; $('#topAvatar').src=user.avatar; $('#topName').textContent=user.name.split(' ').slice(0,2).join(' ');
+  $('#sideRoleLabel').textContent=user.role==='teacher'?('فضاء الأستاذ • '+subjName(user.subject)):'فضاء الإدارة • '+user.subject;
+  renderSidebar(); renderNotifs(); renderView('dashboard'); window.scrollTo(0,0);
+}
+function logout(){localStorage.removeItem('oustadi_session');state.user=null;$('#app').classList.add('hidden');$('#landing').classList.remove('hidden');toast('تم تسجيل الخروج بنجاح. إلى اللقاء!','info')}
+function toggleSidebar(open){const s=$('#sidebar'),o=$('#sideOverlay');if(open){s.classList.remove('translate-x-full');o.classList.remove('hidden')}else{s.classList.add('translate-x-full');o.classList.add('hidden')}}
+function renderSidebar(){
+  const t=state.user.role==='teacher';
+  const items = t?[
+    ['dashboard','fa-gauge','لوحة القيادة'],
+    ['guide','fa-book-open-reader','الدليل البيداغوجي الشامل'],
+    ['inspector','fa-clipboard-check','ملف المفتش'],
+    ['library','fa-layer-group','المكتبة والموارد'],
+    ['grades','fa-table-list','دفتر النقاط'],
+    ['schedule','fa-calendar-days','استعمال الزمن'],
+    ['announcements','fa-bullhorn','الإعلانات'],
+    ['profile','fa-user','حسابي'],
+  ]:[
+    ['dashboard','fa-gauge','لوحة القيادة'],
+    ['teachers','fa-users-gear','إدارة الأساتذة'],
+    ['guide','fa-book-open-reader','الدليل البيداغوجي'],
+    ['reports','fa-chart-line','التقارير والإحصائيات'],
+    ['announcements','fa-bullhorn','الإعلانات'],
+    ['library','fa-layer-group','المكتبة'],
+    ['profile','fa-user','حسابي'],
+  ];
+  $('#sideNav').innerHTML=items.map(([v,i,l])=>`<button onclick="renderView('${v}');toggleSidebar(false)" data-v="${v}" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-[14px] text-gray-600 ${state.view===v?'active':''}"><i class="fa-solid ${i} w-5 text-center"></i>${l}${v==='guide'?'<span class="mr-auto text-[10px] bg-gold-500 text-white px-2 py-0.5 rounded-full font-black">جديد</span>':''}</button>`).join('')+
+  `<div class="mt-4 bg-gradient-to-br from-primary-800 to-primary-950 rounded-2xl p-4 text-white"><p class="font-black text-[13px] mb-1"><i class="fa-solid fa-certificate text-gold-400 ml-1"></i> منهاج الجيل الثاني</p><p class="text-[11px] text-primary-200 mb-2">مطابق لمخططات 2025-2026</p><button onclick="renderView('guide')" class="w-full bg-gold-500 text-primary-950 py-2 rounded-xl font-black text-[12px]">فتح الدليل</button></div>`;
+}
+function renderNotifs(){$('#notifList').innerHTML=NOTIFS.map(n=>`<div class="flex gap-3 p-3 border-b hover:bg-gray-50"><div class="w-10 h-10 rounded-xl ${n.c} flex items-center justify-center shrink-0"><i class="fa-solid ${n.i}"></i></div><div><p class="text-[13px] font-bold leading-snug">${n.t}</p><p class="text-[11px] text-gray-400">${n.time}</p></div></div>`).join('')}
+function handleGlobalSearch(v){if(state.view==='guide'){state.guideSearch=v;renderGuideList()}else if(state.view==='library'){state.libSearch=v;renderView('library')}}
+
+/* ---------- VIEW ROUTER ---------- */
+function renderView(v){
+  state.view=v; state.charts.forEach(c=>{try{c.destroy()}catch(e){}}); state.charts=[];
+  renderSidebar();
+  const c=$('#appContent');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(v==='dashboard') c.innerHTML = state.user.role==='teacher'?viewTeacherDash():viewAdminDash();
+  else if(v==='guide') c.innerHTML = viewGuide();
+  else if(v==='inspector') c.innerHTML = viewInspector();
+  else if(v==='library') c.innerHTML = viewLibrary();
+  else if(v==='grades') c.innerHTML = viewGrades();
+  else if(v==='schedule') c.innerHTML = viewSchedule();
+  else if(v==='announcements') c.innerHTML = viewAnnouncements();
+  else if(v==='profile') c.innerHTML = viewProfile();
+  else if(v==='teachers') c.innerHTML = viewTeachers();
+  else if(v==='reports') c.innerHTML = viewReports();
+  if(v==='dashboard') initDashCharts();
+  if(v==='reports') initReportCharts();
+  if(v==='grades') initGradeChart();
+  if(v==='guide') renderGuideList();
+}
+function getChecklist(){return JSON.parse(localStorage.getItem('check_'+state.user.id)||'{}')}
+function setChecklist(o){localStorage.setItem('check_'+state.user.id,JSON.stringify(o))}
+function checklistPct(){const c=getChecklist();const total=INSPECTOR_DOCS.flatMap(x=>x.items).length;const done=Object.values(c).filter(Boolean).length;return Math.round(done/total*100)}
+
+/* ----- TEACHER DASHBOARD ----- */
+function viewTeacherDash(){
+  const u=state.user, pct=checklistPct();
+  const mq=buildMaqati3(u.subject==='math'||SUBJECTS.find(s=>s.id===u.subject)?(SUBJECTS.find(s=>s.id===u.subject)?u.subject:'math'):'math','4am');
+  return `
+  <div class="bg-gradient-to-l from-primary-900 via-primary-800 to-primary-700 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden mb-6">
+    <div class="absolute -left-10 -top-10 w-56 h-56 bg-gold-500/20 rounded-full blur-3xl"></div>
+    <div class="relative flex flex-wrap items-center justify-between gap-4">
+      <div><p class="text-primary-200 font-bold text-sm">صباح الخير، ${u.name.split(' ')[0]} <i class="fa-solid fa-hand-wave text-gold-400"></i></p>
+      <h2 class="text-2xl md:text-3xl font-black mt-1">فضاء الأستاذ — ${subjName(SUBJECTS.find(s=>s.id===u.subject)?u.subject:'math')}</h2>
+      <p class="text-primary-100 text-sm mt-1">لديك 3 حصص اليوم • المقطع الحالي: ${mq[2].title} • جاهزية ملف المفتش ${pct}%</p>
+      <div class="flex gap-2 mt-4"><button onclick="renderView('guide')" class="gold-btn text-primary-950 px-5 py-2.5 rounded-xl font-black text-sm"><i class="fa-solid fa-book-open ml-1"></i> مواصلة الدليل</button><button onclick="renderView('inspector')" class="bg-white/15 border border-white/20 px-5 py-2.5 rounded-xl font-black text-sm hover:bg-white/25">ملف المفتش</button></div></div>
+      <div class="hidden md:block text-center bg-white/10 rounded-3xl p-5 border border-white/15"><p class="text-4xl font-black text-gold-400">${pct}%</p><p class="text-[12px] text-primary-100">جاهزية الملف</p><div class="w-28 bg-white/20 rounded-full h-2 mt-2"><div class="bg-gold-400 h-2 rounded-full" style="width:${pct}%"></div></div></div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    ${[['fa-layer-group','المقاطع المنجزة','4 / 6','bg-primary-100 text-primary-700'],['fa-users','تلاميذي','128 تلميذ','bg-blue-100 text-blue-600'],['fa-clock','الحجم الساعي','18 سا / أسبوع','bg-gold-100 text-gold-600'],['fa-award','نسبة النجاح','82%','bg-green-100 text-green-600']].map(([i,t,v,c])=>`<div class="bg-white rounded-2xl p-4 border shadow-card flex items-center gap-3"><div class="w-12 h-12 rounded-2xl ${c} flex items-center justify-center shrink-0"><i class="fa-solid ${i} text-xl"></i></div><div><p class="font-black">${v}</p><p class="text-[12px] text-gray-500 font-bold">${t}</p></div></div>`).join('')}
+  </div>
+  <div class="grid lg:grid-cols-3 gap-5">
+    <div class="lg:col-span-2 bg-white rounded-3xl border shadow-card p-5">
+      <div class="flex items-center justify-between mb-4"><p class="font-black text-lg"><i class="fa-solid fa-fire text-orange-500 ml-1"></i> أكمل من حيث توقفت</p><button onclick="renderView('guide')" class="text-primary-700 font-black text-sm">الدليل الكامل <i class="fa-solid fa-arrow-left"></i></button></div>
+      ${mq.slice(1,4).map((m,i)=>`<div class="flex items-center gap-3 border rounded-2xl p-3 mb-2 hover:border-primary-400 transition cursor-pointer" onclick="renderView('guide')"><span class="w-10 h-10 rounded-xl ${i===0?'bg-green-500':'bg-primary-800'} text-white font-black flex items-center justify-center shrink-0">${i===0?'<i class="fa-solid fa-check"></i>':(i+2)}</span><div class="flex-1"><p class="font-black text-sm">${m.title}</p><div class="w-full bg-gray-100 rounded-full h-1.5 mt-1"><div class="h-1.5 rounded-full ${i===0?'bg-green-500':'bg-primary-600'}" style="width:${i===0?100:(i===1?55:15)}%"></div></div></div><span class="text-[11px] font-black ${i===0?'text-green-600':'text-gray-400'}">${i===0?'مكتمل':(i===1?'جارٍ':'قادم')}</span></div>`).join('')}
+      <div class="mt-4 bg-primary-50 border border-primary-200 rounded-2xl p-4"><p class="font-black text-sm text-primary-900 mb-2"><i class="fa-solid fa-lightbulb text-gold-500 ml-1"></i> توصية المفتش لهذا الأسبوع</p><p class="text-[13px] text-gray-600">ركّز على الوضعيات الإدماجية في نهاية كل مقطع، ووثّق المعالجة البيداغوجية في دفتر المتابعة — تُطلب systematically عند كل زيارة.</p></div>
+    </div>
+    <div class="space-y-5">
+      <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3"><i class="fa-solid fa-calendar-day text-primary-700 ml-1"></i> حصص اليوم</p>
+        ${[['08:00','4م1 — الحساب الحرفي','قاعة 12'],['10:00','4م3 — نظرية فيثاغورس','قاعة 12'],['14:00','3م2 — الأشعة','قاعة 8']].map(([h,t,r])=>`<div class="flex items-center gap-3 py-2 border-b last:border-0"><span class="text-[12px] font-black bg-primary-800 text-white px-2 py-1 rounded-lg" dir="ltr">${h}</span><div><p class="font-black text-[13px]">${t}</p><p class="text-[11px] text-gray-400">${r}</p></div></div>`).join('')}
+      </div>
+      <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-2">التقدم الأسبوعي</p><canvas id="chTeach" height="150"></canvas></div>
+    </div>
+  </div>
+  <div class="mt-5 bg-white rounded-3xl border shadow-card p-5"><div class="flex items-center justify-between mb-3"><p class="font-black text-lg"><i class="fa-solid fa-bullhorn text-gold-500 ml-1"></i> آخر إعلانات الإدارة</p><button onclick="renderView('announcements')" class="text-primary-700 font-black text-sm">الكل</button></div><div class="grid md:grid-cols-3 gap-3">${announcements.slice(0,3).map(a=>`<div class="bg-gray-50 border rounded-2xl p-3"><p class="font-black text-sm mb-1">${a.pin?'<i class="fa-solid fa-thumbtack text-red-500 ml-1"></i>':''}${a.title}</p><p class="text-[12px] text-gray-500 line-clamp-2">${a.body}</p></div>`).join('')}</div></div>`;
+}
+function viewAdminDash(){
+  const teachers=users.filter(u=>u.role==='teacher');
+  return `
+  <div class="bg-gradient-to-l from-navy-900 to-navy-800 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden mb-6">
+    <div class="relative flex flex-wrap items-center justify-between gap-4">
+      <div><p class="text-gray-300 font-bold text-sm">لوحة القيادة • متوسطة النور — ${state.user.wilaya}</p>
+      <h2 class="text-2xl md:text-3xl font-black mt-1">مرحباً ${state.user.name.split(' ')[0]} <span class="text-gold-400">(${state.user.subject})</span></h2>
+      <p class="text-gray-300 text-sm mt-1">${teachers.length} أستاذ • 620 تلميذ • 16 قسماً • السنة الدراسية 2025-2026</p>
+      <div class="flex gap-2 mt-4"><button onclick="renderView('teachers')" class="gold-btn text-primary-950 px-5 py-2.5 rounded-xl font-black text-sm">تسيير الأساتذة</button><button onclick="renderView('announcements')" class="bg-white/15 border border-white/20 px-5 py-2.5 rounded-xl font-black text-sm">نشر إعلان</button></div></div>
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><p class="font-black text-2xl text-gold-400">${teachers.length}</p><p class="text-[11px] text-gray-300">أستاذ</p></div>
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><p class="font-black text-2xl">620</p><p class="text-[11px] text-gray-300">تلميذ</p></div>
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><p class="font-black text-2xl text-green-400">94%</p><p class="text-[11px] text-gray-300">الجاهزية</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid lg:grid-cols-3 gap-5 mb-5">
+    <div class="lg:col-span-2 bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">التقدم في المقاطع حسب المادة (%)</p><canvas id="chAdmin1" height="130"></canvas></div>
+    <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">توزيع الأساتذة حسب الطور</p><canvas id="chAdmin2" height="180"></canvas></div>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl border shadow-card p-5"><div class="flex items-center justify-between mb-3"><p class="font-black"><i class="fa-solid fa-user-clock text-gold-500 ml-1"></i> طلبات الحسابات الجديدة</p><button onclick="renderView('teachers')" class="text-primary-700 text-sm font-black">إدارة</button></div>
+      ${users.filter(u=>u.status==='pending').map(u=>`<div class="flex items-center gap-3 border rounded-2xl p-3 mb-2"><img src="${u.avatar}" class="w-10 h-10 rounded-full"><div class="flex-1"><p class="font-black text-sm">${u.name}</p><p class="text-[12px] text-gray-500">${subjName(u.subject)||u.subject} • ${u.wilaya}</p></div><button onclick="approveUser('${u.id}')" class="bg-green-500 text-white px-3 py-1.5 rounded-lg text-[12px] font-black">قبول</button></div>`).join('')||'<p class="text-sm text-gray-400 text-center py-4">لا توجد طلبات معلقة ✓</p>'}
+    </div>
+    <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3"><i class="fa-solid fa-timeline text-primary-700 ml-1"></i> النشاط الأخير</p>
+      ${[['أ. أمين بن علي أكمل مقطع الأشعة — 4م','منذ ساعة','bg-green-100 text-green-600 fa-check'],['أ. سارة حداد رفعت فروض الفصل الثاني','منذ 3 ساعات','bg-blue-100 text-blue-600 fa-upload'],['تم نشر رزنامة الاختبارات','أمس','bg-gold-100 text-gold-600 fa-calendar']].map(([t,time,c])=>`<div class="flex items-center gap-3 py-2.5 border-b last:border-0"><div class="w-9 h-9 rounded-xl ${c.split(' ').slice(0,2).join(' ')} flex items-center justify-center"><i class="fa-solid ${c.split(' ')[2]} text-sm"></i></div><div><p class="font-bold text-[13px]">${t}</p><p class="text-[11px] text-gray-400">${time}</p></div></div>`).join('')}
+    </div>
+  </div>`;
+}
+function initDashCharts(){
+  let c1=$('#chTeach'); if(c1) state.charts.push(new Chart(c1,{type:'line',data:{labels:['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'],datasets:[{data:[3,5,4,6,5,7],borderColor:'#0B6B3A',backgroundColor:'rgba(11,107,58,.12)',fill:true,tension:.4,borderWidth:3,pointBackgroundColor:'#D4A017'}]},options:{plugins:{legend:{display:false}},scales:{y:{display:false},x:{ticks:{font:{size:9,family:'Cairo'}}}}}}));
+  let a1=$('#chAdmin1'); if(a1) state.charts.push(new Chart(a1,{type:'bar',data:{labels:['رياضيات','عربية','فرنسية','علوم','فيزياء','إنجليزية'],datasets:[{data:[78,85,72,80,76,68],backgroundColor:['#0B6B3A','#D4A017','#2563EB','#059669','#DC2626','#7C3AED'],borderRadius:8}]},options:{plugins:{legend:{display:false}},scales:{y:{max:100}}}}));
+  let a2=$('#chAdmin2'); if(a2) state.charts.push(new Chart(a2,{type:'doughnut',data:{labels:['1 متوسط','2 متوسط','3 متوسط','4 متوسط'],datasets:[{data:[12,11,13,12],backgroundColor:['#0B6B3A','#D4A017','#2563EB','#DC2626']}]},options:{plugins:{legend:{position:'bottom',labels:{font:{family:'Cairo',size:11}}}}}}));
+}
+function approveUser(id){const u=users.find(x=>x.id===id);if(u){u.status='active';saveUsers();toast(`تم قبول حساب ${u.name}`);renderView('dashboard')}}
+
+/* ----- GUIDE (CORE) ----- */
+function viewGuide(){
+  return `
+  <div class="bg-gradient-to-l from-primary-900 to-primary-700 rounded-3xl p-6 text-white mb-5 relative overflow-hidden">
+    <div class="relative flex flex-wrap items-center justify-between gap-3">
+      <div><div class="flex items-center gap-2 mb-2"><span class="badge-official !bg-gold-500 !text-primary-950"><i class="fa-solid fa-certificate"></i> منهاج الجيل الثاني الرسمي</span><span class="text-[11px] bg-white/15 px-2 py-1 rounded-full">مخططات 2025-2026</span></div>
+      <h2 class="text-2xl font-black">الدليل البيداغوجي الشامل للأستاذ</h2>
+      <p class="text-primary-100 text-sm">المقاطع • الموارد المعرفية • الكفاءات المستهدفة • المنهاج • وضعيات الإدماج — كل ما يطلبه المفتش</p></div>
+      <button onclick="printYearPlan()" class="gold-btn text-primary-950 px-5 py-2.5 rounded-xl font-black text-sm"><i class="fa-solid fa-print ml-1"></i> طباعة التوزيع السنوي</button>
+    </div>
+  </div>
+  <div class="bg-white rounded-3xl border shadow-card p-5 mb-5">
+    <p class="font-black text-sm text-gray-500 mb-2">1️⃣ اختر المستوى:</p>
+    <div class="flex flex-wrap gap-2 mb-4">${Object.entries(LEVELS).map(([k,l])=>`<button onclick="state.guideLevel='${k}';renderView('guide')" class="level-pill px-4 py-2 rounded-xl font-black text-[13px] border ${state.guideLevel===k?'active':'bg-gray-50'}">${l.name}</button>`).join('')}</div>
+    <p class="font-black text-sm text-gray-500 mb-2">2️⃣ اختر المادة:</p>
+    <div class="flex flex-wrap gap-2 mb-4">${SUBJECTS.map(s=>`<button onclick="state.guideSubject='${s.id}';renderView('guide')" class="subj-chip ${state.guideSubject===s.id?'active':''} flex items-center gap-2 border-2 rounded-xl px-3 py-2 text-[13px] font-black bg-white"><i class="fa-solid ${s.icon}" style="color:${s.color}"></i>${s.name}</button>`).join('')}</div>
+    <div class="flex flex-wrap gap-2 items-center">
+      <p class="font-black text-sm text-gray-500">الفصل:</p>
+      ${[['all','الكل'],['1','الأول'],['2','الثاني'],['3','الثالث']].map(([v,l])=>`<button onclick="state.guideTerm='${v}';renderView('guide')" class="px-4 py-1.5 rounded-lg text-[13px] font-black ${state.guideTerm===v?'bg-primary-800 text-white':'bg-gray-100 text-gray-600'}">${l}</button>`).join('')}
+      <div class="flex bg-gray-100 rounded-xl p-1 mr-auto">
+        ${[['maqati3','المقاطع'],['comp','الكفاءات والميادين'],['res','الموارد'],['plan','التوزيع السنوي']].map(([v,l])=>`<button onclick="state.guideTab='${v}';renderView('guide')" class="tab-btn px-4 py-1.5 rounded-lg text-[13px] font-black ${state.guideTab===v?'active':'text-gray-500'}">${l}</button>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div id="guideBody"></div>`;
+}
+function renderGuideList(){
+  const body=$('#guideBody'); if(!body) return;
+  const lvl=state.guideLevel, sid=state.guideSubject;
+  const s=SUBJECTS.find(x=>x.id===sid);
+  let mq=buildMaqati3(sid,lvl);
+  if(state.guideTerm!=='all') mq=mq.filter(m=>m.term==state.guideTerm);
+  if(state.guideSearch) mq=mq.filter(m=>m.title.includes(state.guideSearch)||m.competence.includes(state.guideSearch));
+  const prog=JSON.parse(localStorage.getItem('prog_'+state.user.id+'_'+sid+'_'+lvl)||'{}');
+
+  if(state.guideTab==='comp'){
+    body.innerHTML=`
+    <div class="grid lg:grid-cols-2 gap-5">
+      <div class="bg-white rounded-3xl border shadow-card p-6"><p class="font-black text-lg mb-3"><i class="fa-solid fa-bullseye text-gold-500 ml-1"></i> الكفاءة الشاملة — ${s.name} (${LEVELS[lvl].name})</p><div class="bg-primary-50 border border-primary-200 rounded-2xl p-4 text-[15px] leading-relaxed font-semibold text-primary-950">${GLOBAL_COMP[sid]}</div>
+      <p class="font-black mt-5 mb-3">الكفاءات الختامية للميادين:</p>
+      <div class="space-y-2">${['الميدان الأول: المفاهيم والمعارف الأساسية','الميدان الثاني: التوظيف والمنهجية','الميدان الثالث: الإدماج وحل المشكلات','الميدان الرابع: القيم والمواقف'].map((d,i)=>`<div class="flex gap-3 bg-gray-50 border rounded-2xl p-3"><span class="w-9 h-9 shrink-0 rounded-xl bg-primary-800 text-white font-black flex items-center justify-center">م${i+1}</span><div><p class="font-black text-sm">${d}</p><p class="text-[12px] text-gray-500">يُقيَّم عبر وضعيات إدماجية + شبكة تقويم رسمية بمعايير: الوجاهة، الاستعمال السليم، الانسجام، الإتقان.</p></div></div>`).join('')}</div></div>
+      <div class="space-y-5">
+        <div class="bg-white rounded-3xl border shadow-card p-6"><p class="font-black text-lg mb-3"><i class="fa-solid fa-file-lines text-primary-700 ml-1"></i> بطاقة المنهاج الرسمي</p>
+        <div class="grid grid-cols-3 gap-2 text-center mb-4"><div class="bg-primary-50 rounded-2xl p-3"><p class="font-black text-xl text-primary-800">${s.coef[lvl]}</p><p class="text-[11px] font-bold text-gray-500">المعامل</p></div><div class="bg-gold-50 rounded-2xl p-3"><p class="font-black text-[15px] text-gold-600">${s.hours}</p><p class="text-[11px] font-bold text-gray-500">الحجم الساعي</p></div><div class="bg-blue-50 rounded-2xl p-3"><p class="font-black text-xl text-blue-700">${buildMaqati3(sid,lvl).length}</p><p class="text-[11px] font-bold text-gray-500">مقطعاً</p></div></div>
+        <div class="space-y-2">${[['المنهاج الرسمي PDF — الجيل الثاني','2.4 MB','fa-file-pdf text-red-500'],['دليل الأستاذ الرسمي','5.1 MB','fa-book text-primary-600'],['مخططات التعلمات السنوية','1.8 MB','fa-table-list text-gold-600'],['الكتاب المدرسي','12 MB','fa-book-open text-green-600']].map(([t,sz,ic])=>`<div class="flex items-center gap-3 border rounded-xl p-2.5 hover:border-primary-400 transition"><i class="fa-solid ${ic} text-xl"></i><div class="flex-1"><p class="font-black text-[13px]">${t}</p><p class="text-[11px] text-gray-400">${sz} • وثيقة رسمية</p></div><button onclick="toast('جارٍ تحميل ${t}...','info')" class="bg-primary-800 text-white w-9 h-9 rounded-xl"><i class="fa-solid fa-download text-sm"></i></button></div>`).join('')}</div></div>
+        <div class="bg-gradient-to-br from-gold-500 to-gold-600 rounded-3xl p-6 text-primary-950"><p class="font-black mb-2"><i class="fa-solid fa-trophy ml-1"></i> ${lvl==='4am'?'تحضير شهادة BEM':'التقويم الرسمي'}</p><p class="text-[13px] font-semibold leading-relaxed">${lvl==='4am'?'مواضيع BEM للسنوات العشر الأخيرة مع التصحيح النموذجي متوفرة في المكتبة. ركز على المقاطع 3-5 فهي الأكثر وروداً (70% من المواضيع).':'التقويم: فروض محروسة (40%) + اختبارات فصلية + مراقبة مستمرة، وفق المنشور الوزاري.'}</p></div>
+      </div>
+    </div>`; return;
+  }
+  if(state.guideTab==='res'){
+    body.innerHTML=`<div class="bg-white rounded-3xl border shadow-card p-6"><p class="font-black text-lg mb-4"><i class="fa-solid fa-layer-group text-gold-500 ml-1"></i> الموارد المعرفية — ${s.name} ${LEVELS[lvl].name}</p><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+    ${mq.map((m,i)=>`<div class="border rounded-2xl p-4 hover:border-primary-400 hover:shadow-soft transition"><p class="font-black text-sm mb-2">المقطع ${i+1}: ${m.title}</p><div class="flex flex-wrap gap-1.5 mb-3">${m.resources.map(r=>`<span class="text-[11px] bg-primary-50 text-primary-800 px-2 py-1 rounded-lg font-bold">${r}</span>`).join('')}</div><div class="flex gap-2"><button onclick="toast('تم تحميل حزمة موارد: ${m.title}','info')" class="flex-1 bg-primary-800 text-white py-2 rounded-xl text-[12px] font-black"><i class="fa-solid fa-download ml-1"></i>تحميل الحزمة</button><button onclick="state.guideTab='maqati3';state.expanded=${m.id};renderView('guide')" class="flex-1 bg-gold-100 text-gold-600 py-2 rounded-xl text-[12px] font-black">عرض المقطع</button></div></div>`).join('')}</div></div>`; return;
+  }
+  if(state.guideTab==='plan'){
+    const all=buildMaqati3(sid,lvl);
+    body.innerHTML=`<div class="bg-white rounded-3xl border shadow-card p-6"><div class="flex items-center justify-between mb-4"><p class="font-black text-lg"><i class="fa-solid fa-calendar-week text-primary-700 ml-1"></i> التوزيع السنوي — ${s.name} ${LEVELS[lvl].name}</p><button onclick="printYearPlan()" class="bg-primary-800 text-white px-4 py-2 rounded-xl text-sm font-black"><i class="fa-solid fa-print ml-1"></i> طباعة</button></div>
+    <div class="overflow-x-auto"><table class="app-table w-full text-sm rounded-2xl overflow-hidden border"><thead><tr><th>المقطع</th><th>العنوان</th><th>الفصل</th><th>الأسابيع</th><th>الفترة</th><th>الكفاءة المستهدفة (مختصر)</th></tr></thead><tbody>
+    ${all.map((m,i)=>{const starts=['سبتمبر','أكتوبر','نوفمبر','جانفي','مارس','أفريل'];return `<tr><td class="font-black">${i+1}</td><td class="font-bold">${m.title}</td><td><span class="bg-primary-100 text-primary-800 px-2 py-0.5 rounded-full text-[12px] font-black">الفصل ${m.term}</span></td><td>${m.weeks}</td><td class="text-gray-500 text-[13px]">${starts[i%starts.length]}</td><td class="text-[12px] text-gray-600 max-w-xs">توظيف موارد «${m.title}» في وضعيات دالة...</td></tr>`}).join('')}
+    </tbody></table></div>
+    <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded-2xl p-4 text-[13px]"><b>ملاحظة المفتش:</b> يجب تأشيرة التوزيع من طرف مدير المؤسسة قبل 30 سبتمبر، مع احترام أحجام المقاطع في مخططات الوزارة. أي تأخر يُعوَّض بحصص الدعم.</div></div>`; return;
+  }
+  // maqati3 tab
+  const totalLessons=mq.reduce((a,m)=>a+m.lessons.length,0);
+  const doneCount=Object.values(prog).filter(Boolean).length;
+  body.innerHTML=`
+  <div class="bg-white rounded-2xl border p-4 mb-4 flex flex-wrap items-center gap-3 shadow-card">
+    <p class="font-black text-sm">تقدمك في ${s.name} — ${LEVELS[lvl].name}:</p>
+    <div class="flex-1 min-w-[150px] bg-gray-100 rounded-full h-3"><div class="progress-bar bg-gradient-to-l from-primary-600 to-gold-500 h-3 rounded-full" style="width:${totalLessons?Math.round(doneCount/totalLessons*100):0}%"></div></div>
+    <p class="font-black text-sm text-primary-700">${doneCount}/${totalLessons} درساً</p>
+  </div>
+  <div class="space-y-4">${mq.map((m,idx)=>`
+    <div class="maqta-card bg-white rounded-3xl border-2 ${state.expanded===m.id?'active':'border-gray-100'} shadow-card overflow-hidden">
+      <button onclick="state.expanded=${state.expanded===m.id?-1:m.id};renderView('guide')" class="w-full p-5 flex items-center gap-4 text-right">
+        <span class="w-14 h-14 shrink-0 rounded-2xl ${prog[m.id+'_done']?'bg-green-500':'bg-gradient-to-br from-primary-700 to-primary-900'} text-white font-black text-xl flex items-center justify-center">${prog[m.id+'_done']?'<i class="fa-solid fa-check"></i>':(idx+1)}</span>
+        <div class="flex-1 min-w-0"><p class="text-[11px] font-black text-gold-600">المقطع ${idx+1} • الفصل ${m.term} • ${m.weeks} أسابيع</p><h3 class="font-black text-lg leading-snug">${m.title}</h3></div>
+        <span class="hidden md:inline text-[11px] bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full font-black">${m.lessons.length} دروس</span>
+        <i class="fa-solid fa-chevron-${state.expanded===m.id?'up':'down'} text-gray-400"></i>
+      </button>
+      <div class="accordion-body ${state.expanded===m.id?'open':''}"><div class="px-5 pb-5 border-t pt-4 grid lg:grid-cols-2 gap-4">
+        <div class="space-y-3">
+          <div class="bg-primary-50 border border-primary-200 rounded-2xl p-4"><p class="font-black text-sm text-primary-900 mb-1"><i class="fa-solid fa-bullseye text-gold-600 ml-1"></i> الكفاءة المستهدفة</p><p class="text-[13px] text-gray-700 leading-relaxed">${m.competence}</p></div>
+          <div class="bg-gold-50 border border-gold-500/30 rounded-2xl p-4"><p class="font-black text-sm mb-1"><i class="fa-solid fa-play text-gold-600 ml-1"></i> الوضعية الأم (الانطلاق)</p><p class="text-[13px] text-gray-700 leading-relaxed">${m.sitDepart}</p></div>
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4"><p class="font-black text-sm mb-1"><i class="fa-solid fa-puzzle-piece text-blue-600 ml-1"></i> وضعية الإدماج + التقويم</p><p class="text-[13px] text-gray-700 leading-relaxed">${m.integration}<br><span class="text-blue-700 font-bold">${m.eval}</span></p></div>
+        </div>
+        <div>
+          <p class="font-black text-sm mb-2"><i class="fa-solid fa-list-check text-primary-700 ml-1"></i> دروس المقطع (حدّد المنجز):</p>
+          <div class="space-y-1.5 mb-3">${m.lessons.map((l,li)=>`<label class="flex items-center gap-2 bg-gray-50 border rounded-xl p-2.5 text-[13px] cursor-pointer hover:border-primary-300 transition"><input type="checkbox" class="lesson-check w-4 h-4 accent-green-600" ${prog[m.id+'_'+li]?'checked':''} onchange="toggleLesson('${sid}','${lvl}',${m.id},${li},this.checked)"><span class="font-semibold">${l}</span></label>`).join('')}</div>
+          <p class="font-black text-sm mb-2"><i class="fa-solid fa-box-archive text-gold-600 ml-1"></i> الموارد المعرفية:</p>
+          <div class="flex flex-wrap gap-1.5 mb-3">${m.resources.map(r=>`<span class="text-[11px] bg-gray-100 border px-2 py-1 rounded-lg font-bold"><i class="fa-solid fa-file text-primary-600 ml-1"></i>${r}</span>`).join('')}</div>
+          <div class="flex gap-2"><button onclick="toast('جارٍ تحميل مذكرات: ${m.title}...','info')" class="flex-1 grad-btn text-white py-2.5 rounded-xl text-[13px] font-black"><i class="fa-solid fa-download ml-1"></i> مذكرات PDF</button><button onclick="toggleLesson('${sid}','${lvl}',${m.id},'done',${!prog[m.id+'_done']})" class="flex-1 ${prog[m.id+'_done']?'bg-gray-200 text-gray-600':'gold-btn text-primary-950'} py-2.5 rounded-xl text-[13px] font-black"><i class="fa-solid fa-check-double ml-1"></i> ${prog[m.id+'_done']?'إلغاء الإنجاز':'إتمام المقطع'}</button></div>
+        </div>
+      </div></div>
+    </div>`).join('')||'<div class="bg-white rounded-3xl border p-10 text-center text-gray-400 font-bold">لا توجد مقاطع مطابقة للبحث</div>'}
+  </div>`;
+}
+function toggleLesson(sid,lvl,mid,li,val){
+  const k='prog_'+state.user.id+'_'+sid+'_'+lvl;
+  const p=JSON.parse(localStorage.getItem(k)||'{}');
+  if(li==='done'){const m=buildMaqati3(sid,lvl).find(x=>x.id===mid);m.lessons.forEach((_,i)=>p[mid+'_'+i]=val);p[mid+'_done']=val;toast(val?'أحسنت! تم إتمام المقطع ✓':'تم إلغاء إتمام المقطع','info')}
+  else{p[mid+'_'+li]=val}
+  localStorage.setItem(k,JSON.stringify(p)); renderView('guide');
+}
+function printYearPlan(){
+  const lvl=state.guideLevel,sid=state.guideSubject;
+  const s=SUBJECTS.find(x=>x.id===sid), all=buildMaqati3(sid,lvl);
+  $('#printArea').innerHTML=`<div style="font-family:Cairo;padding:30px" dir="rtl">
+    <div style="text-align:center;border-bottom:3px double #0B6B3A;padding-bottom:15px;margin-bottom:20px">
+      <p style="font-weight:900">الجمهورية الجزائرية الديمقراطية الشعبية — وزارة التربية الوطنية</p>
+      <h2>التوزيع السنوي — مادة ${s.name} — ${LEVELS[lvl].name} — 2025/2026</h2>
+      <p>الأستاذ(ة): ${state.user?state.user.name:''} • المؤسسة: متوسطة النور • المعامل: ${s.coef[lvl]} • الحجم الساعي: ${s.hours}</p>
+    </div>
+    <table border="1" style="width:100%;border-collapse:collapse;font-size:13px"><tr style="background:#0B6B3A;color:#fff"><th>المقطع</th><th>العنوان</th><th>الفصل</th><th>المدة</th><th>الكفاءة المستهدفة</th></tr>
+    ${all.map((m,i)=>`<tr><td style="text-align:center;font-weight:900">${i+1}</td><td style="font-weight:700">${m.title}</td><td style="text-align:center">الفصل ${m.term}</td><td style="text-align:center">${m.weeks} أسابيع</td><td style="font-size:11px">${m.competence}</td></tr>`).join('')}</table>
+    <div style="display:flex;justify-content:space-between;margin-top:40px"><p>توقيع الأستاذ(ة)</p><p>توقيع المدير</p><p>تأشيرة المفتش</p></div></div>`;
+  window.print(); toast('تم إرسال التوزيع السنوي إلى الطابعة','info');
+}
+
+/* ----- INSPECTOR ----- */
+function viewInspector(){
+  const c=getChecklist(); const pct=checklistPct();
+  let gi=0;
+  return `
+  <div class="bg-gradient-to-l from-primary-900 to-primary-700 rounded-3xl p-6 text-white mb-5 flex flex-wrap items-center justify-between gap-4">
+    <div><h2 class="text-2xl font-black"><i class="fa-solid fa-clipboard-check text-gold-400 ml-2"></i> ملف المفتش البيداغوجي</h2><p class="text-primary-100 text-sm">كل ما يطلبه مفتش المادة وفق التعليمات الرسمية — تتبع جاهزيتك لحظة بلحظة</p></div>
+    <div class="text-center bg-white/10 rounded-2xl px-6 py-3 border border-white/15"><p class="text-3xl font-black text-gold-400">${pct}%</p><p class="text-[11px]">جاهزية الملف</p></div>
+  </div>
+  <div class="w-full bg-white rounded-full h-3 mb-5 border"><div class="progress-bar bg-gradient-to-l from-primary-600 to-gold-500 h-3 rounded-full" style="width:${pct}%"></div></div>
+  <div class="grid lg:grid-cols-2 gap-5">
+    ${INSPECTOR_DOCS.map(cat=>`<div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3"><i class="fa-solid fa-folder-open text-gold-500 ml-1"></i> ${cat.cat}</p><div class="space-y-2">
+      ${cat.items.map(d=>{const id='doc'+(gi++);const done=!!c[id];return `<div class="check-item ${done?'done':''} flex items-start gap-3 border-2 border-gray-100 rounded-2xl p-3">
+        <button onclick="toggleCheck('${id}')" class="w-8 h-8 shrink-0 rounded-xl ${done?'bg-green-500':'bg-gray-200'} text-white flex items-center justify-center transition"><i class="fa-solid ${done?'fa-check':'fa-plus'} text-sm"></i></button>
+        <div class="flex-1"><p class="font-black text-sm ${done?'line-through text-green-700':''}">${d.t} ${done?'<span class="text-[10px] bg-green-500 text-white px-2 py-0.5 rounded-full no-underline">جاهز ✓</span>':''}</p><p class="text-[12px] text-gray-500">${d.d}</p></div>
+        <button onclick="toast('تحميل نموذج: ${d.t}','info')" title="تحميل نموذج" class="w-9 h-9 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-800 hover:text-white transition shrink-0"><i class="fa-solid fa-download text-sm"></i></button>
+      </div>`}).join('')}
+    </div></div>`).join('')}
+  </div>
+  <div class="mt-5 grid md:grid-cols-3 gap-4">
+    <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-2"><i class="fa-solid fa-upload text-primary-700 ml-1"></i> رفع وثيقة للملف</p><input type="file" id="docFile" class="hidden" onchange="uploadDoc(this)"><button onclick="document.getElementById('docFile').click()" class="w-full border-2 border-dashed border-primary-300 rounded-2xl py-6 text-primary-700 font-bold hover:bg-primary-50 transition"><i class="fa-solid fa-cloud-arrow-up text-2xl block mb-1"></i>اسحب أو انقر لرفع ملف</button><div id="uploadedDocs" class="mt-2 space-y-1"></div></div>
+    <div class="bg-gradient-to-br from-primary-800 to-primary-950 rounded-3xl p-5 text-white"><p class="font-black mb-2"><i class="fa-solid fa-user-tie text-gold-400 ml-1"></i> نصائح المفتش الذهبية</p><ul class="text-[13px] space-y-2 text-primary-100"><li>✓ المذكرة تُحضَّر قبل الحصة بـ 24 سا على الأقل</li><li>✓ دفتر التنقيط يُحيَّن بعد كل فرض مباشرة</li><li>✓ وثّق كل عمليات المعالجة البيداغوجية</li><li>✓ احتفظ بنسخة من كل مراسلة إدارية</li></ul></div>
+    <div class="bg-gold-500 rounded-3xl p-5 text-primary-950"><p class="font-black mb-2"><i class="fa-solid fa-print ml-1"></i> طباعة وتصدير</p><p class="text-[13px] font-semibold mb-3">اطبع قائمة التحقق أو التوزيع السنوي لتقديمها للمفتش.</p><button onclick="printYearPlan()" class="w-full bg-primary-950 text-white py-2.5 rounded-xl font-black text-sm mb-2">طباعة التوزيع السنوي</button><button onclick="toast('تم تصدير تقرير الجاهزية (${pct}%)','info')" class="w-full bg-white py-2.5 rounded-xl font-black text-sm">تصدير تقرير الجاهزية</button></div>
+  </div>`;
+}
+function toggleCheck(id){const c=getChecklist();c[id]=!c[id];setChecklist(c);renderView('inspector');if(c[id])toast('أحسنت! وثيقة أخرى جاهزة ✓')}
+function uploadDoc(input){if(input.files[0]){const f=input.files[0];$('#uploadedDocs').innerHTML+=`<div class="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl p-2 text-[13px] font-bold text-green-700"><i class="fa-solid fa-file-circle-check"></i>${f.name}<span class="mr-auto text-[11px]">تم الرفع ✓</span></div>`;toast('تم رفع الوثيقة إلى ملفك')}}
+
+/* ----- LIBRARY ----- */
+const LIB_TYPES=[['all','الكل'],['مذكرات','مذكرات'],['فروض','فروض واختبارات'],['كتب','كتب وأدلة'],['عروض','عروض وفيديو']];
+function viewLibrary(){
+  const lvl=state.guideLevel,sid=state.guideSubject;
+  const mq=buildMaqati3(sid,lvl);
+  let items=[];
+  mq.forEach((m,i)=>{
+    items.push({t:`مذكرات المقطع ${i+1}: ${m.title}`,type:'مذكرات',size:'1.2 MB',dl:842+i*57,ic:'fa-file-lines',c:'text-primary-600 bg-primary-50'});
+    items.push({t:`فرض + اختبار: ${m.title} (مع التصحيح)`,type:'فروض',size:'890 KB',dl:1204+i*43,ic:'fa-file-pen',c:'text-red-500 bg-red-50'});
+  });
+  items.push({t:`دليل الأستاذ — ${subjName(sid)} ${LEVELS[lvl].name}`,type:'كتب',size:'5.4 MB',dl:2310,ic:'fa-book',c:'text-gold-600 bg-gold-50'});
+  items.push({t:`الكتاب المدرسي الرسمي PDF`,type:'كتب',size:'18 MB',dl:3120,ic:'fa-book-open',c:'text-green-600 bg-green-50'});
+  items.push({t:`عروض تقديمية تفاعلية للفصل`,type:'عروض',size:'24 MB',dl:654,ic:'fa-person-chalkboard',c:'text-purple-600 bg-purple-50'});
+  if(state.libFilter!=='all') items=items.filter(x=>x.type===state.libFilter);
+  if(state.libSearch) items=items.filter(x=>x.t.includes(state.libSearch));
+  return `
+  <div class="bg-gradient-to-l from-purple-900 to-primary-900 rounded-3xl p-6 text-white mb-5"><h2 class="text-2xl font-black"><i class="fa-solid fa-layer-group text-gold-400 ml-2"></i> المكتبة البيداغوجية</h2><p class="text-sm text-gray-300">مذكرات • فروض واختبارات مع التصحيح • كتب • عروض — ${subjName(sid)} / ${LEVELS[lvl].name}</p></div>
+  <div class="flex flex-wrap gap-2 mb-5">${LIB_TYPES.map(([v,l])=>`<button onclick="state.libFilter='${v}';renderView('library')" class="px-4 py-2 rounded-xl text-[13px] font-black ${state.libFilter===v?'bg-primary-800 text-white':'bg-white border text-gray-600'}">${l}</button>`).join('')}
+  <span class="mr-auto text-[13px] font-bold text-gray-500">${items.length} مورداً متاحاً</span></div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">${items.map(d=>`
+    <div class="card-hover bg-white rounded-3xl border shadow-card p-5"><div class="flex items-start gap-3 mb-3"><div class="w-12 h-12 rounded-2xl ${d.c} flex items-center justify-center shrink-0"><i class="fa-solid ${d.ic} text-xl"></i></div><div><span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded-full font-black text-gray-500">${d.type}</span><p class="font-black text-sm mt-1 leading-snug">${d.t}</p></div></div>
+    <div class="flex items-center gap-3 text-[11px] text-gray-400 font-bold mb-3"><span><i class="fa-solid fa-hard-drive ml-1"></i>${d.size}</span><span><i class="fa-solid fa-download ml-1"></i>${d.dl} تحميل</span><span class="text-gold-500">★★★★★</span></div>
+    <div class="flex gap-2"><button onclick="toast('جارٍ تحميل: ${d.t.slice(0,25)}...','info')" class="flex-1 grad-btn text-white py-2 rounded-xl text-[13px] font-black"><i class="fa-solid fa-download ml-1"></i>تحميل</button><button onclick="toast('فتح المعاينة...','info')" class="flex-1 bg-gray-100 py-2 rounded-xl text-[13px] font-black hover:bg-gray-200"><i class="fa-solid fa-eye ml-1"></i>معاينة</button></div></div>`).join('')}</div>`;
+}
+
+/* ----- GRADES ----- */
+function viewGrades(){
+  const saved=JSON.parse(localStorage.getItem('grades_'+state.user.id+'_'+state.gradesClass)||'{}');
+  return `
+  <div class="bg-white rounded-3xl border shadow-card p-6 mb-5"><div class="flex flex-wrap items-center justify-between gap-3">
+    <div><h2 class="text-2xl font-black"><i class="fa-solid fa-table-list text-primary-700 ml-2"></i> دفتر النقاط</h2><p class="text-sm text-gray-500">التقويم المستمر + الفروض + الاختبارات — المعدلات تُحسب تلقائياً</p></div>
+    <div class="flex gap-2">${['4م1','4م2','3م1'].map(cl=>`<button onclick="state.gradesClass='${cl}';renderView('grades')" class="px-4 py-2 rounded-xl text-sm font-black ${state.gradesClass===cl?'bg-primary-800 text-white':'bg-gray-100'}">${cl}</button>`).join('')}<button onclick="saveGrades()" class="grad-btn text-white px-5 py-2 rounded-xl text-sm font-black"><i class="fa-solid fa-floppy-disk ml-1"></i> حفظ</button></div>
+  </div></div>
+  <div class="grid lg:grid-cols-3 gap-5">
+    <div class="lg:col-span-2 bg-white rounded-3xl border shadow-card overflow-hidden"><div class="overflow-x-auto"><table class="app-table w-full text-sm"><thead><tr><th>#</th><th>التلميذ(ة)</th><th>تقويم مستمر /20</th><th>فرض /20</th><th>اختبار /20</th><th>المعدل</th></tr></thead><tbody>
+    ${STUDENTS.map((n,i)=>{const g=saved[i]||{cc:'',dv:'',ex:''};return `<tr><td class="text-gray-400">${i+1}</td><td class="font-bold whitespace-nowrap">${n}</td><td><input type="number" min="0" max="20" class="grade-input" data-i="${i}" data-k="cc" value="${g.cc}" oninput="calcRow(this)"></td><td><input type="number" min="0" max="20" class="grade-input" data-i="${i}" data-k="dv" value="${g.dv}" oninput="calcRow(this)"></td><td><input type="number" min="0" max="20" class="grade-input" data-i="${i}" data-k="ex" value="${g.ex}" oninput="calcRow(this)"></td><td><span id="avg${i}" class="font-black px-2 py-1 rounded-lg bg-gray-100">—</span></td></tr>`}).join('')}
+    </tbody></table></div></div>
+    <div class="space-y-5"><div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">إحصائيات القسم ${state.gradesClass}</p><div id="gradeStats" class="grid grid-cols-2 gap-2 text-center"></div><canvas id="chGrade" height="170" class="mt-3"></canvas></div>
+    <div class="bg-gradient-to-br from-primary-800 to-primary-950 rounded-3xl p-5 text-white"><p class="font-black mb-2 text-sm"><i class="fa-solid fa-calculator text-gold-400 ml-1"></i> طريقة الحساب الرسمية</p><p class="text-[12px] text-primary-100 leading-relaxed">معدل المادة = (التقويم المستمر + الفرض + الاختبار × 2) ÷ 4 — وفق المنشور الوزاري للتقويم في الطور المتوسط.</p></div></div>
+  </div>`;
+}
+function calcRow(input){
+  const i=input.dataset.i;
+  const vals={}; document.querySelectorAll(`.grade-input[data-i="${i}"]`).forEach(x=>vals[x.dataset.k]=parseFloat(x.value)||null);
+  const el=document.getElementById('avg'+i);
+  if(vals.cc==null||vals.dv==null||vals.ex==null){el.textContent='—';el.className='font-black px-2 py-1 rounded-lg bg-gray-100';return}
+  const avg=((vals.cc+vals.dv+vals.ex*2)/4);
+  el.textContent=avg.toFixed(2);
+  el.className='font-black px-2 py-1 rounded-lg '+(avg>=10?'bg-green-100 text-green-700':'bg-red-100 text-red-600');
+  updateGradeStats();
+}
+function updateGradeStats(){
+  const avgs=[];STUDENTS.forEach((_,i)=>{const t=document.getElementById('avg'+i)?.textContent;if(t&&t!=='—')avgs.push(parseFloat(t))});
+  const pass=avgs.filter(a=>a>=10).length;
+  $('#gradeStats').innerHTML=[['المعدل العام',avgs.length?(avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2):'—'],['نسبة النجاح',avgs.length?Math.round(pass/avgs.length*100)+'%':'—'],['أعلى معدل',avgs.length?Math.max(...avgs).toFixed(2):'—'],['المحاضر',avgs.length+'/'+STUDENTS.length]].map(([l,v])=>`<div class="bg-gray-50 border rounded-2xl p-2.5"><p class="font-black text-lg text-primary-800">${v}</p><p class="text-[11px] text-gray-500 font-bold">${l}</p></div>`).join('');
+}
+function saveGrades(){const data={};document.querySelectorAll('.grade-input').forEach(x=>{data[x.dataset.i]=data[x.dataset.i]||{};data[x.dataset.i][x.dataset.k]=x.value});localStorage.setItem('grades_'+state.user.id+'_'+state.gradesClass,JSON.stringify(data));toast('تم حفظ نقاط قسم '+state.gradesClass+' بنجاح ✓');updateGradeStats()}
+function initGradeChart(){
+  document.querySelectorAll('.grade-input').forEach(x=>calcRow(x)); updateGradeStats();
+  const c=$('#chGrade'); if(c) state.charts.push(new Chart(c,{type:'bar',data:{labels:['0-5','5-10','10-15','15-20'],datasets:[{data:[2,4,9,5],backgroundColor:['#DC2626','#D4A017','#0E9B4D','#0B6B3A'],borderRadius:8}]},options:{plugins:{legend:{display:false}}}}));
+}
+
+/* ----- SCHEDULE ----- */
+function viewSchedule(){
+  const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'];
+  const hours=['08-09','09-10','10-11','11-12','13-14','14-15','15-16'];
+  const data={'0':['4م1','4م1','—','3م2','—','4م3','4م3'],'1':['3م2','3م2','4م1','—','4م2','4م2','—'],'2':['4م3','—','4م2','4م2','—','3م1','3م1'],'3':['—','3م1','3م1','4م1','4م3','—','دعم'],'4':['4م2','4م1','—','—','3م2','3م2','—']};
+  return `<div class="bg-white rounded-3xl border shadow-card p-6"><div class="flex flex-wrap items-center justify-between gap-3 mb-4"><div><h2 class="text-2xl font-black"><i class="fa-solid fa-calendar-days text-primary-700 ml-2"></i> استعمال الزمن الأسبوعي</h2><p class="text-sm text-gray-500">الأحد — الخميس • 18 ساعة • ${subjName(SUBJECTS.find(s=>s.id===state.user.subject)?state.user.subject:'math')}</p></div><button onclick="window.print();toast('تم إرسال استعمال الزمن للطباعة','info')" class="bg-primary-800 text-white px-5 py-2 rounded-xl text-sm font-black"><i class="fa-solid fa-print ml-1"></i> طباعة</button></div>
+  <div class="overflow-x-auto"><table class="app-table w-full text-sm text-center min-w-[700px]"><thead><tr><th>التوقيت</th>${days.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>
+  ${hours.map((h,r)=>`<tr><td class="font-black bg-gray-50" dir="ltr">${h}</td>${days.map((_,d)=>{const v=data[d][r];return `<td>${v==='—'?'<span class="text-gray-300">—</span>':`<span class="inline-block ${v==='دعم'?'bg-gold-100 text-gold-600':'bg-primary-50 text-primary-800 border border-primary-200'} px-3 py-1.5 rounded-xl font-black text-[13px]">${v==='دعم'?'حصة دعم':v+' — رياضيات'}</span>`}</td>`}).join('')}</tr>`).join('')}
+  </tbody></table></div>
+  <div class="mt-4 flex flex-wrap gap-2 text-[12px] font-bold"><span class="bg-primary-50 border border-primary-200 text-primary-800 px-3 py-1.5 rounded-xl">18 سا تدريس</span><span class="bg-gold-100 text-gold-600 px-3 py-1.5 rounded-xl">1 سا دعم ومعالجة</span><span class="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-xl">2 سا استقبال وتنسيق</span></div></div>`;
+}
+
+/* ----- ANNOUNCEMENTS ----- */
+function viewAnnouncements(){
+  const admin=state.user.role==='admin';
+  return `${admin?`<div class="bg-white rounded-3xl border shadow-card p-5 mb-5"><p class="font-black mb-3"><i class="fa-solid fa-plus text-primary-700 ml-1"></i> نشر إعلان جديد</p><div class="grid md:grid-cols-3 gap-3"><input id="annTitle" placeholder="عنوان الإعلان" class="border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-primary-600"><input id="annBody" placeholder="نص الإعلان..." class="md:col-span-2 border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-primary-600"><button onclick="addAnn()" class="grad-btn text-white py-2.5 rounded-xl font-black text-sm md:col-span-3"><i class="fa-solid fa-paper-plane ml-1"></i> نشر الإعلان لجميع الأساتذة</button></div></div>`:''}
+  <div class="grid md:grid-cols-2 gap-4">${announcements.map(a=>`<div class="bg-white rounded-3xl border shadow-card p-5 ${a.pin?'border-gold-500/50':''}">${a.pin?'<span class="text-[11px] bg-red-100 text-red-600 px-2 py-1 rounded-full font-black"><i class="fa-solid fa-thumbtack ml-1"></i>مثبت</span>':''}<p class="font-black text-lg mt-1">${a.title}</p><p class="text-gray-500 text-sm leading-relaxed mt-1 mb-3">${a.body}</p><div class="flex items-center justify-between text-[12px] text-gray-400 font-bold"><span><i class="fa-solid fa-user ml-1"></i>${a.author} • ${a.date}</span>${admin?`<button onclick="delAnn(${a.id})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i> حذف</button>`:''}</div></div>`).join('')}</div>`;
+}
+function addAnn(){const t=$('#annTitle').value.trim(),b=$('#annBody').value.trim();if(!t||!b)return toast('يرجى ملء العنوان والنص','error');announcements.unshift({id:Date.now(),title:t,body:b,date:new Date().toISOString().slice(0,10),author:state.user.name,pin:false});saveAnn();renderView('announcements');toast('تم نشر الإعلان بنجاح ✓')}
+function delAnn(id){announcements=announcements.filter(a=>a.id!==id);saveAnn();renderView('announcements');toast('تم حذف الإعلان','info')}
+
+/* ----- PROFILE ----- */
+function viewProfile(){
+  const u=state.user;
+  return `<div class="grid lg:grid-cols-3 gap-5">
+  <div class="bg-white rounded-3xl border shadow-card p-6 text-center"><img src="${u.avatar}" class="w-28 h-28 rounded-full mx-auto border-4 border-primary-100 shadow"><p class="font-black text-xl mt-3">${u.name}</p><p class="text-sm text-gray-500 font-bold">${u.role==='teacher'?'أستاذ(ة) '+subjName(u.subject):u.subject}</p><p class="text-[12px] text-gray-400 mt-1"><i class="fa-solid fa-location-dot ml-1"></i>${u.wilaya} • عضو منذ ${u.created}</p>
+  ${u.via?'<span class="inline-block mt-2 text-[11px] bg-[#1877F2] text-white px-3 py-1 rounded-full font-black"><i class="fa-brands fa-facebook ml-1"></i> مسجل عبر فيسبوك</span>':''}
+  <div class="grid grid-cols-3 gap-2 mt-4 text-center"><div class="bg-primary-50 rounded-2xl p-2.5"><p class="font-black text-primary-800">${checklistPct()}%</p><p class="text-[10px] font-bold text-gray-500">ملف المفتش</p></div><div class="bg-gold-50 rounded-2xl p-2.5"><p class="font-black text-gold-600">24</p><p class="text-[10px] font-bold text-gray-500">مورداً</p></div><div class="bg-blue-50 rounded-2xl p-2.5"><p class="font-black text-blue-700">128</p><p class="text-[10px] font-bold text-gray-500">تلميذاً</p></div></div></div>
+  <div class="lg:col-span-2 bg-white rounded-3xl border shadow-card p-6"><p class="font-black text-lg mb-4">تعديل المعلومات الشخصية</p>
+  <div class="grid md:grid-cols-2 gap-3">
+    <div><label class="text-[13px] font-bold text-gray-600">الاسم الكامل</label><input id="pName" value="${u.name}" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none"></div>
+    <div><label class="text-[13px] font-bold text-gray-600">البريد الإلكتروني</label><input value="${u.email}" disabled class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm bg-gray-50 text-gray-400" dir="ltr" style="text-align:right"></div>
+    <div><label class="text-[13px] font-bold text-gray-600">الولاية</label><select id="pWilaya" class="mt-1 w-full border rounded-xl px-3 py-2.5 text-sm focus:border-primary-600 outline-none">${WILAYAS.map(w=>`<option ${w===u.wilaya?'selected':''}>${w}</option>`).join('')}</select></div>
+    <div><label class="text-[13px] font-bold text-gray-600">الهاتف</label><input id="pPhone" placeholder="05 XX XX XX XX" value="${u.phone||''}" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none" dir="ltr" style="text-align:right"></div>
+    <div><label class="text-[13px] font-bold text-gray-600">كلمة مرور جديدة (اترك فارغاً للإبقاء)</label><input id="pPass" type="password" class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm focus:border-primary-600 outline-none"></div>
+    <div><label class="text-[13px] font-bold text-gray-600">المؤسسة</label><input value="متوسطة النور" disabled class="mt-1 w-full border rounded-xl px-4 py-2.5 text-sm bg-gray-50 text-gray-400"></div>
+  </div>
+  <button onclick="saveProfile()" class="grad-btn text-white px-8 py-2.5 rounded-xl font-black mt-4"><i class="fa-solid fa-floppy-disk ml-1"></i> حفظ التعديلات</button></div></div>`;
+}
+function saveProfile(){
+  const u=state.user; u.name=$('#pName').value||u.name; u.wilaya=$('#pWilaya').value; u.phone=$('#pPhone').value;
+  if($('#pPass').value){u.pass=$('#pPass').value;toast('تم تحديث كلمة المرور أيضاً')}
+  const i=users.findIndex(x=>x.id===u.id); if(i>=0)users[i]=u; saveUsers();
+  $('#sideName').textContent=u.name; $('#topName').textContent=u.name.split(' ').slice(0,2).join(' ');
+  toast('تم حفظ معلومات حسابك بنجاح ✓'); renderView('profile');
+}
+
+/* ----- TEACHERS (ADMIN) ----- */
+function viewTeachers(){
+  const list=users.filter(u=>u.role==='teacher');
+  return `<div class="bg-white rounded-3xl border shadow-card p-6 mb-5"><div class="flex flex-wrap items-center justify-between gap-3"><div><h2 class="text-2xl font-black"><i class="fa-solid fa-users-gear text-primary-700 ml-2"></i> إدارة حسابات الأساتذة</h2><p class="text-sm text-gray-500">${list.length} أستاذ(ة) مسجل في المنصة</p></div>
+  <div class="flex gap-2"><input oninput="state.tSearch=this.value;renderView('teachers')" placeholder="بحث بالاسم..." value="${state.tSearch||''}" class="border rounded-xl px-4 py-2 text-sm outline-none focus:border-primary-600"><button onclick="toast('تم إرسال رابط الدعوة — inscription: oustadi.dz/join','info')" class="gold-btn text-primary-950 px-5 py-2 rounded-xl text-sm font-black"><i class="fa-solid fa-user-plus ml-1"></i> دعوة أستاذ</button></div></div></div>
+  <div class="bg-white rounded-3xl border shadow-card overflow-hidden"><div class="overflow-x-auto"><table class="app-table w-full text-sm min-w-[750px]"><thead><tr><th>الأستاذ(ة)</th><th>المادة</th><th>الولاية</th><th>التسجيل</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>
+  ${list.filter(u=>!state.tSearch||u.name.includes(state.tSearch)).map(u=>`<tr><td><div class="flex items-center gap-2"><img src="${u.avatar}" class="w-9 h-9 rounded-full"><div><p class="font-black">${u.name}</p><p class="text-[11px] text-gray-400" dir="ltr">${u.email}</p></div></div></td><td><span class="bg-primary-50 text-primary-800 px-2 py-1 rounded-lg text-[12px] font-black">${subjName(u.subject)||u.subject}</span></td><td>${u.wilaya}</td><td class="text-gray-500 text-[13px]">${u.created}${u.via?' <i class="fa-brands fa-facebook text-[#1877F2]"></i>':''}</td><td>${u.status==='active'?'<span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-[12px] font-black">مفعّل</span>':u.status==='pending'?'<span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-[12px] font-black">معلق</span>':'<span class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-[12px] font-black">موقوف</span>'}</td>
+  <td><div class="flex gap-1.5">${u.status==='pending'?`<button onclick="setStatus('${u.id}','active')" class="bg-green-500 text-white px-3 py-1.5 rounded-lg text-[12px] font-black">قبول</button>`:''}${u.status==='active'?`<button onclick="setStatus('${u.id}','suspended')" class="bg-yellow-500 text-white px-3 py-1.5 rounded-lg text-[12px] font-black">تعليق</button>`:`<button onclick="setStatus('${u.id}','active')" class="bg-green-500 text-white px-3 py-1.5 rounded-lg text-[12px] font-black">تفعيل</button>`}<button onclick="delUser('${u.id}')" class="bg-red-50 text-red-600 px-3 py-1.5 rounded-lg text-[12px] font-black">حذف</button></div></td></tr>`).join('')}
+  </tbody></table></div></div>`;
+}
+function setStatus(id,s){const u=users.find(x=>x.id===id);u.status=s;saveUsers();toast(s==='active'?`تم تفعيل حساب ${u.name}`:`تم تعليق حساب ${u.name}`,'info');renderView('teachers')}
+function delUser(id){if(!confirm('حذف هذا الحساب نهائياً؟'))return;users=users.filter(x=>x.id!==id);saveUsers();toast('تم حذف الحساب','info');renderView('teachers')}
+
+/* ----- REPORTS (ADMIN) ----- */
+function viewReports(){
+  return `<div class="bg-gradient-to-l from-navy-900 to-primary-900 rounded-3xl p-6 text-white mb-5 flex flex-wrap items-center justify-between gap-3"><div><h2 class="text-2xl font-black"><i class="fa-solid fa-chart-line text-gold-400 ml-2"></i> التقارير والإحصائيات</h2><p class="text-sm text-gray-300">متابعة بيداغوجية شاملة للمتوسطة — الفصل الثاني 2025/2026</p></div><button onclick="window.print();toast('تم إرسال التقرير للطباعة','info')" class="gold-btn text-primary-950 px-5 py-2.5 rounded-xl font-black text-sm"><i class="fa-solid fa-print ml-1"></i> طباعة التقرير</button></div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">${[['نسبة إتمام المقاطع','76%','fa-layer-group text-primary-600 bg-primary-50'],['جاهزية ملفات المفتش','94%','fa-clipboard-check text-green-600 bg-green-50'],['متوسط النجاح العام','81%','fa-award text-gold-600 bg-gold-50'],['الأساتذة النشطون','45/48','fa-users text-blue-600 bg-blue-50']].map(([l,v,ic])=>`<div class="bg-white rounded-2xl border shadow-card p-4 flex items-center gap-3"><div class="w-12 h-12 rounded-2xl ${ic.split(' ').slice(1).join(' ')} flex items-center justify-center"><i class="fa-solid ${ic.split(' ')[0]} text-xl"></i></div><div><p class="font-black text-xl">${v}</p><p class="text-[12px] text-gray-500 font-bold">${l}</p></div></div>`).join('')}</div>
+  <div class="grid lg:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">نسب النجاح حسب المادة — الفصل الأول</p><canvas id="chR1" height="160"></canvas></div>
+    <div class="bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">تطور إتمام المقاطع عبر الأشهر</p><canvas id="chR2" height="160"></canvas></div>
+  </div>
+  <div class="mt-5 bg-white rounded-3xl border shadow-card p-5"><p class="font-black mb-3">جدول المتابعة البيداغوجية حسب القسم</p><div class="overflow-x-auto"><table class="app-table w-full text-sm"><thead><tr><th>القسم</th><th>عدد التلاميذ</th><th>المعدل العام</th><th>نسبة النجاح</th><th>التقدم في المقاطع</th><th>التقييم</th></tr></thead><tbody>
+  ${[['4م1',32,'13.45','88%',85],['4م2',30,'12.80','83%',80],['4م3',31,'14.10','94%',90],['3م1',29,'12.20','79%',72],['3م2',30,'13.02','86%',78]].map(([c,n,m,p,pr])=>`<tr><td class="font-black">${c}</td><td>${n}</td><td class="font-black">${m}</td><td><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-black">${p}</span></td><td><div class="w-32 bg-gray-100 rounded-full h-2 inline-block"><div class="bg-primary-600 h-2 rounded-full" style="width:${pr}%"></div></div> ${pr}%</td><td>${p>='85%'?'<span class="text-green-600 font-black">ممتاز ✓</span>':'<span class="text-gold-600 font-black">حسن — يحتاج دعماً</span>'}</td></tr>`).join('')}
+  </tbody></table></div></div>`;
+}
+function initReportCharts(){
+  let r1=$('#chR1');if(r1)state.charts.push(new Chart(r1,{type:'bar',data:{labels:['رياضيات','عربية','فرنسية','إنجليزية','علوم','فيزياء'],datasets:[{data:[78,86,74,82,88,80],backgroundColor:'#0B6B3A',borderRadius:8},{data:[70,80,68,75,82,73],backgroundColor:'#D4A017',borderRadius:8}]},options:{plugins:{legend:{labels:{font:{family:'Cairo'}}}}},scales:{y:{max:100}}}}));
+  let r2=$('#chR2');if(r2)state.charts.push(new Chart(r2,{type:'line',data:{labels:['سبتمبر','أكتوبر','نوفمبر','ديسمبر','جانفي'],datasets:[{label:'نسبة الإتمام %',data:[15,32,48,62,76],borderColor:'#0B6B3A',backgroundColor:'rgba(11,107,58,.1)',fill:true,tension:.4,borderWidth:3}]},options:{plugins:{legend:{labels:{font:{family:'Cairo'}}}}}}));
+}
+
+/* ---------- CHATBOT ---------- */
+let chatOpened=false;
+function toggleChat(force){
+  const p=$('#chatPanel');
+  const show=force!==undefined?force:p.classList.contains('hidden');
+  p.classList.toggle('hidden',!show);
+  if(show&&!chatOpened){chatOpened=true;botSay('مرحباً! أنا <b>مرشد</b> مساعدك البيداغوجي. اسألني عن المقاطع، الكفاءات، المنهاج، أو ما يطلبه المفتش في أي مادة.');setTimeout(()=>botSay('جرّب: "ما هي مقاطع رياضيات 4 متوسط؟" أو "ماذا يطلب المفتش؟"'),800)}
+}
+function botSay(html){$('#chatMsgs').innerHTML+=`<div class="chat-msg flex gap-2"><div class="w-8 h-8 rounded-full bg-primary-800 flex items-center justify-center shrink-0"><i class="fa-solid fa-robot text-gold-400 text-sm"></i></div><div class="bg-white border rounded-2xl rounded-tr-sm p-3 text-[13px] leading-relaxed shadow-sm flex-1">${html}</div></div>`;$('#chatMsgs').scrollTop=9999}
+function sendChat(){
+  const inp=$('#chatInput'),v=inp.value.trim();if(!v)return;inp.value='';
+  $('#chatMsgs').innerHTML+=`<div class="chat-msg flex justify-start flex-row-reverse"><div class="bg-primary-800 text-white rounded-2xl rounded-tl-sm p-3 text-[13px] max-w-[85%]">${v}</div></div>`;$('#chatMsgs').scrollTop=9999;
+  setTimeout(()=>botSay(botAnswer(v)),700);
+}
+function botAnswer(q){
+  q=q.toLowerCase();
+  if(q.includes('مفتش'))return 'يطلب مفتش المادة <b>12 وثيقة أساسية</b>: التوزيع السنوي، مخطط التعلمات، دفتر التحضير (المذكرات)، دفتر النصوص، دفتر التنقيط، ملف الفروض مع التصحيح النموذجي، كراس التكوين، بطاقة التقويم التشخيصي، ملف المعالجة، كشف الغيابات، الوثائق الرسمية (المنهاج+الدليل)، واستعمال الزمن. تجدها كلها في صفحة <b>ملف المفتش</b> مع نماذج جاهزة!';
+  if(q.includes('مقطع')||q.includes('مقاطع')){
+    for(const s of SUBJECTS){if(q.includes(s.name)||q.includes(s.id)){for(const lvl of Object.keys(LEVELS)){if(q.includes(LEVELS[lvl].name)||q.includes(lvl[0])){const mq=buildMaqati3(s.id,lvl);return `مقاطع <b>${s.name} — ${LEVELS[lvl].name}</b>:<br>${mq.map((m,i)=>`${i+1}. ${m.title} <span style="color:#888">(${m.weeks} أسابيع)</span>`).join('<br>')}`}}}}
+    const mq=buildMaqati3('math','4am');return `مثال — مقاطع <b>رياضيات 4 متوسط</b>:<br>${mq.map((m,i)=>`${i+1}. ${m.title}`).join('<br>')}<br><br>حدد المادة والمستوى وسأعرض لك مقاطعها!`;
+  }
+  if(q.includes('كفاءة'))return 'البنية الرسمية للكفاءات: <b>الكفاءة الشاملة</b> (نهاية الطور) ← <b>الكفاءات الختامية</b> (نهاية كل ميدان/سنة) ← <b>الكفاءة المستهدفة</b> (لكل مقطع ودرس). كل مقطع في الدليل يعرض كفاءته المستهدفة + الوضعية الأم + شبكة التقويم بمعايير: الوجاهة، الاستعمال السليم، الانسجام، الإتقان.';
+  if(q.includes('منهاج')||q.includes('جيل'))return 'نعتمد <b>منهاج الجيل الثاني</b> الرسمي لوزارة التربية الوطنية + <b>مخططات التعلمات 2025-2026</b>. كل مادة تعرض: المعامل، الحجم الساعي، الكفاءة الشاملة، والمقاطع بتفاصيلها. الوثائق PDF متاحة في تبويب "الكفاءات والميادين".';
+  if(q.includes('فيسبوك')||q.includes('تسجيل')||q.includes('حساب'))return 'يمكنك إنشاء حساب <b>مجاناً</b> بطريقتين: بالبريد الإلكتروني (الاسم + الولاية + المادة) أو بضغطة واحدة عبر <b>فيسبوك</b>. اختر دورك: أستاذ(ة) أو إدارة، وستحصل على لوحة تحكم مخصصة فوراً.';
+  if(q.includes('bem')||q.includes('بيام')||q.includes('شهادة'))return 'لتحضير <b>BEM</b>: ركز على مقاطع الحساب الحرفي، فيثاغورس، الدوال وجملة معادلتين (رياضيات) — فهي تمثل 70% من المواضيع. مواضيع السنوات العشر الأخيرة مع التصحيح متوفرة في <b>المكتبة</b>. بالتوفيق لتلاميذك!';
+  if(q.includes('فرض')||q.includes('اختبار')||q.includes('نقط'))return 'بناء المواضيع: 60% أسئلة مباشرة (استرجاع وتطبيق) + 40% وضعية إدماجية. لا تنسَ: التصحيح النموذجي + سلم التنقيط + نسب النجاح — يطلبها المفتش في كل زيارة. نماذج جاهزة في المكتبة ودفتر النقاط يحسب المعدلات تلقائياً.';
+  if(q.includes('سلام')||q.includes('مرحبا')||q.includes('صباح')||q.includes('مساء'))return 'أهلاً وسهلاً بك! كيف أساعدك اليوم في مسارك البيداغوجي؟';
+  if(q.includes('شكرا'))return 'العفو! سعيد بمساعدتك. بالتوفيق في رسالتك النبيلة — الأستاذ صانع الأجيال.';
+  return 'سؤال وجيه! يمكنني مساعدتك حول: <b>مقاطع أي مادة ومستوى</b>، <b>الكفاءات المستهدفة</b>، <b>ما يطلبه المفتش</b>، <b>المنهاج الرسمي</b>، <b>الفروض والنقاط</b>، و<b>التسجيل في المنصة</b>. أعد صياغة سؤالك وسأجيبك بدقة!';
+}
+
+/* ---------- INIT ---------- */
+document.addEventListener('DOMContentLoaded',()=>{
+  $('#fWilaya').innerHTML=WILAYAS.map(w=>`<option>${w}</option>`).join('');
+  fillSubjectSelect(); renderLanding(); selectRole('teacher');
+  $('#authModal').addEventListener('click',e=>{if(e.target.id==='authModal')closeAuth()});
+  $('#fbModal').addEventListener('click',e=>{if(e.target.id==='fbModal')$('#fbModal').classList.add('hidden')});
+  const sid=localStorage.getItem('oustadi_session');
+  if(sid){const u=users.find(x=>x.id===sid);if(u){$('#navAuthBtns').innerHTML=`<button onclick='enterApp(users.find(x=>x.id==="${u.id}"))' class="grad-btn text-white px-5 py-2.5 rounded-xl font-bold shadow-soft"><i class="fa-solid fa-gauge ml-2"></i>الدخول إلى حسابي</button>`}}
+});
+document.addEventListener('click',e=>{const d=$('#notifDrop');if(d&&!d.classList.contains('hidden')&&!e.target.closest('#notifDrop')&&!e.target.closest('[onclick*="notifDrop"]'))d.classList.add('hidden')});
+</script>
+</body>
+</html>
